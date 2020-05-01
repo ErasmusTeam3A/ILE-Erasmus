@@ -1,0 +1,19 @@
+{
+  "name": "ile-erasmus",
+  "version": "1.0.0",
+  "description": "The ILE Erasmus app is targeted at students who are studying female bodies.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErasmusTeam3A/ILE-Erasmus.git"
+  },
+  "author": "Mio Spruit, Lars van Boven, Hayen Phan, Jaron Hoste and Casper Wychel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ErasmusTeam3A/ILE-Erasmus/issues"
+  },
+  "homepage": "https://github.com/ErasmusTeam3A/ILE-Erasmus#readme"
+}
