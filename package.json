@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/ErasmusTeam3A/ILE-Erasmus/issues"
   },
-  "homepage": "https://github.com/ErasmusTeam3A/ILE-Erasmus#readme"
+  "homepage": "https://github.com/ErasmusTeam3A/ILE-Erasmus#readme",
+  "dependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4"
+  }
 }
