@@ -22,6 +22,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
+    open: true,
     contentBase: './dist'
   }
 };
