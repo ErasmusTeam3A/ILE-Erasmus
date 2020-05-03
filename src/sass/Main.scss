@@ -23,7 +23,8 @@ map-get-deep($typo, 'base', 'md')
 
 // Mixins
 @import
-    './mixins/breakpoints';
+    './mixins/breakpoints',
+    './mixins/distance';
 
 // Base styles
 
