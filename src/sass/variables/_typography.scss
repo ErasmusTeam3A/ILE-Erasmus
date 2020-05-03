@@ -1,0 +1,78 @@
+/* ===============================================
+   Typography settings
+   =============================================== */
+@import url("//fast.fonts.net/cssapi/058464e8-6f64-4880-9e59-42598da486ed.css");
+
+$typo: (
+    // fonts
+    'font': (
+        'text': 'Univers W01, Arial, sans-serif',
+        'head': 'Futura W01, Helvetica, sans-serif',
+    ),
+    'selection': (
+        'background': #b4d5fe,
+        'text-color': #000,
+    ),
+    // line height
+    'line-height': (
+        'text': 1.8,
+        'head': 1.1,
+    ),
+    // weights
+    'weight': (
+        'light': 300,
+        'regular': 400,
+        'bold': 700,
+    ),
+    // default sizes
+    'base': (
+        'xs': 14px,
+        'sm': 14px,
+        'md': 16px,
+    ),
+    'xsmall': (
+        'xs': 10px,
+        'sm': 10px,
+        'md': 10px,
+    ),
+    'small': (
+        'xs': 13px,
+        'sm': 13px,
+        'md': 13px,
+    ),
+    'title': (
+        'xs': 32px,
+        'sm': 56px,
+        'md': 80px,
+    ),
+    'h1': (
+        'xs': 32px,
+        'sm': 40px,
+        'md': 56px,
+    ),
+    'h2': (
+        'xs': 24px,
+        'sm': 24px,
+        'md': 36px,
+    ),
+    'h3': (
+        'xs': 21px,
+        'sm': 21px,
+        'md': 24px,
+    ),
+    'h4': (
+        'xs': 16px,
+        'sm': 16px,
+        'md': 21px,
+    ),
+    'h5': (
+        'xs': 14px,
+        'sm': 14px,
+        'md': 16px,
+    ),
+    'h6': (
+        'xs': 14px,
+        'sm': 14px,
+        'md': 14px,
+    ),
+);
