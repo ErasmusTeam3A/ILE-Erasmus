@@ -1,10 +1,25 @@
+// MAP-GET-DEEP USAGE
+/*
+@Colors
+map-get-deep($colors, 'brand', 'secondary');
+
+@Font-family
+unquote(map-get-deep($typo, 'font', 'head'));
+
+@Font-size
+map-get-deep($typo, 'base', 'md')
+*/
+
+
 // Functions
 @import
     './functions/map-get-deep';
 
 // Variables
 @import
-    './variables/colors';
+    './variables/colors',
+    './variables/typography',
+    './variables/breakpoints';
 
 // Mixins
 
