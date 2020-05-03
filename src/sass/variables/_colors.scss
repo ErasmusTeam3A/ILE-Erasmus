@@ -9,9 +9,10 @@ $swatches: (
     'blue': #3599a2,
 );
 
-// map colors to components (only use these values in SCSS files!)
+// Map colors to components (only use these values in SCSS files!)
 // Example:
-// color: map-get-deep($colors, 'brand', 'primary');
+// Color: map-get-deep($colors, 'brand', 'primary');
+
 $colors: (
     'brand': (
         'primary': map-get-deep($swatches, 'black'),
