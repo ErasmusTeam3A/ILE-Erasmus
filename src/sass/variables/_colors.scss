@@ -1,0 +1,31 @@
+/* ===============================================
+   Colors
+   =============================================== */
+
+$swatches: (
+    'black': #000,
+    'white': #fff,
+    'red': #E24B12,
+    'blue': #3599a2,
+);
+
+// map colors to components (only use these values in SCSS files!)
+// Example:
+// color: map-get-deep($colors, 'brand', 'primary');
+$colors: (
+    'brand': (
+        'primary': map-get-deep($swatches, 'black'),
+        'secondary': map-get-deep($swatches, 'white'),
+        'tertiary' : map-get-deep($swatches, 'blue'),
+
+    ),
+    'text': (
+        'default': map-get-deep($swatches, 'black'),
+        'accent': map-get-deep($swatches, 'blue'),
+    ),
+    'links': (
+        'default': map-get-deep($swatches, 'black'),
+        'hover': map-get-deep($swatches, 'black'),
+        'active': map-get-deep($swatches, 'black'),
+    ),
+);
