@@ -22,6 +22,8 @@ map-get-deep($typo, 'base', 'md')
     './variables/breakpoints';
 
 // Mixins
+@import
+    './mixins/breakpoints';
 
 // Base styles
 
