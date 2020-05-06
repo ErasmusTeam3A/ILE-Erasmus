@@ -1,5 +1,5 @@
 import React from 'react';
-import './../sass/Main.scss';
+import './../sass/main.scss';
 import {
   BrowserRouter as Router,
   Switch,
