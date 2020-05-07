@@ -4,6 +4,7 @@ const Start = () => {
     return(
         <div>
             Dit is de startpagina
+            <Model/>
         </div>
     )
 };
