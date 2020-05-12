@@ -8,14 +8,15 @@ import {
 
 // Components
 import Start from '../pages/Start';
-import Model from './organisms/Model'
+import ModelView from '../pages/ModelView';
 
 class App extends React.Component {
     render() {
         return (
             <Router>
                 <Switch>
-                  <Route exact path="/" component={Start,Model} />
+                  <Route exact path="/" component={Start} />
+                  <Route exact path="/modelview" component={ModelView}/>
                 </Switch>
             </Router>
         );
