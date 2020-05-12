@@ -60,7 +60,6 @@ class Mode extends React.Component {
             attach="geometry"
             args={[3, 3, 3]}> </boxBufferGeometry>
           <meshBasicMaterial wireframe attach="material" color="black" />
-          
         </mesh>
 
       </Canvas>
