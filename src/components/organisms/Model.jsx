@@ -9,7 +9,7 @@ import OBJLoader from "three-obj-loader";
 var freedomMesh;
 var scene;
 
-class ThreeScene extends React.Component {
+class Model extends React.Component {
   componentDidMount() {
     const width = this.mount.clientWidth;
     const height = this.mount.clientHeight;
@@ -112,4 +112,4 @@ class ThreeScene extends React.Component {
     );
   }
 }
-export default ThreeScene;
+export default Model;
