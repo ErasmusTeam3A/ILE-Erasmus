@@ -104,7 +104,7 @@ class Model extends React.Component {
   render() {
     return (
       <div
-        style={{ width: "800px", height: "800px" }}
+        className="modelContainer"
         ref={mount => {
           this.mount = mount;
         }}
