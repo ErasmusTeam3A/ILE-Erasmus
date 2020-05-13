@@ -1,69 +1,111 @@
 import React, { useRef } from "react";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { Canvas, extend, useThree, useFrame } from "react-three-fiber";
-
-//import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
-
 import * as THREE from "three";
-import React3 from "react-three-renderer";
+//import ObjectModel from 'react-three-renderer-objects';
+//import BodyModel from "../../objects/Pelvic-Ref-001.obj";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import OBJLoader from "three-obj-loader";
 
-extend({ OrbitControls });
 class Mode extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      radiansX: 0,
-      radiansY: 0,
-      radiansZ: 0,
+      'lol': 9
     }
 
-    this.calculateRadians = this.calculateRadians.bind(this);
-    this.Controls = this.Controls.bind(this);
-  }
+    }
 
-  //this.THREE = THREE;
-  //const objLoader = new this.THREE.OBJLoader();
 
-  Controls() {
-    const controls = useRef();
+  componentDidMount() {
+    const width = window.innerWidth;
+     const height = window.innerHeight;
+     const scene = new THREE.Scene();
+     this.camera = new THREE.PerspectiveCamera(75, width / height, 1, 10);
+     this.camera.position.z = 8;
+     this.camera.position.y = 5;
 
-    const { camera, gl } = useThree();
+     // render
+    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer.setClearColor("#263238");
+    this.renderer.setSize(width, height);
 
-    useFrame(() => {
-      controls.current.update();
+    this.mount.appendChild(this.renderer.domElement);
+    const geometry = new THREE.BoxGeometry(5, 5, 5);
+    const material = new THREE.MeshBasicMaterial({
+      color: "#0F0",
+      wireframe: true
     });
 
-    return <orbitControls ref={controls} args={[camera, gl.domElement]} />;
-  };
+    this.cube = new THREE.Mesh(geometry, material);
+    scene.add(this.cube)
 
-  calculateRadians(){
-    const radiansX = (0 * Math.PI) / 180;
-    const radiansY = (0 * Math.PI) / 180;
-    const radiansZ = (0 * Math.PI) / 180;
+    // OrbitControls
+    const controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-    this.setState({ radiansX: radiansX, radiansY: radiansY, radiansZ: radiansZ});
+      //LIGHTS
+     var lights = [];
+     lights[0] = new THREE.PointLight(0x304ffe, 1, 0);
+     lights[1] = new THREE.PointLight(0xffffff, 1, 0);
+     lights[2] = new THREE.PointLight(0xffffff, 1, 0);
+     lights[0].position.set(0, 200, 0);
+     lights[1].position.set(100, 200, 100);
+     lights[2].position.set(-100, -200, -100);
+     scene.add(lights[0]);
+     scene.add(lights[1]);
+     scene.add(lights[2]);
+
+    // Load object
+
+    const x = OBJLoader(THREE);
+    const y = new THREE.OBJLoader();
+
+    y.setPath( '' );
+        console.log(y.load)
+    y.load(
+
+      // resource URL
+    	'/Pelvic-Ref-001.obj',
+    	// called when resource is loaded
+    	function ( object ) {
+
+        // Positioning
+        let freedomMesh = object;
+        freedomMesh.position.setY(3); //or  this
+        freedomMesh.scale.set(0.02, 0.02, 0.02);
+    		scene.add(freedomMesh);
+        console.log(object)
+
+    	},
+
+    	// called when loading is in progresses
+    	function ( xhr ) {
+
+    		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+    	},
+    	// called when loading has errors
+    	function ( error ) {
+
+    		console.log( 'An error happened' );
+
+    	}
+    )
   }
 
+  componentWillUnmount() {
+     this.stop();
+     this.mount.removeChild(this.renderer.domElement);
+   }
+
   render() {
-  return (
-    <div>
-      <Canvas className="model">
+    return (
+     <div
+       style={{ width: "800px", height: "800px" }}
+       ref={mount => {
+         this.mount = mount;
+       }}>
 
-        <mesh rotation={[this.state.radiansX, this.state.radiansY, this.state.radiansZ]}>
-
-        {/* <Controls /> */}
-
-          <boxBufferGeometry
-            rotation={[this.state.radiansX, this.state.radiansY, this.state.radiansZ]}
-            attach="geometry"
-            args={[3, 3, 3]}> </boxBufferGeometry>
-          <meshBasicMaterial wireframe attach="material" color="black" />
-        </mesh>
-
-      </Canvas>
-    </div>
+       </div>
   );
 }
 
