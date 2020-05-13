@@ -14,7 +14,7 @@ class Model extends React.Component {
     const width = this.mount.clientWidth;
     const height = this.mount.clientHeight;
     scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
     this.camera.position.z = 8;
     this.camera.position.y = 5;
 
