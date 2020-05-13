@@ -56,6 +56,7 @@ class Model extends React.Component {
       function(object) {
         freedomMesh = object;
         freedomMesh.position.setY(3); //or  this
+        freedomMesh.position.setX(-5); //or  this
         freedomMesh.scale.set(0.02, 0.02, 0.02);
         scene.add(freedomMesh);
       },
