@@ -1,13 +1,13 @@
 /* ===============================================
    Typography settings
    =============================================== */
-@import url("//fast.fonts.net/cssapi/058464e8-6f64-4880-9e59-42598da486ed.css");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@400;700&display=swap'");
 
 $typo: (
     // fonts
     'font': (
-        'text': 'Univers W01, Arial, sans-serif',
-        'head': 'Futura W01, Helvetica, sans-serif',
+        'text': 'Open Sans, sans-serif',
+        'head': 'Raleway, sans-serif',
     ),
     'selection': (
         'background': #b4d5fe,
