@@ -8,8 +8,12 @@ module.exports = {
         use: ['babel-loader']
       },
       {
-          test:/\.s[ac]ss$/i,
-          use:['style-loader','css-loader', 'sass-loader']
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader'
       }
     ]
   },
@@ -24,5 +28,5 @@ module.exports = {
   devServer: {
     open: true,
     contentBase: './dist'
-  }
+  },
 };

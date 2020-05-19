@@ -27,7 +27,15 @@ map-get-deep($typo, 'base', 'md')
     './mixins/distance';
 
 // Base styles
+@import
+      './base/base.scss',
+      './base/start.scss';
 
 // Components
-@import './components/test.scss';
-@import './components/Model.scss'
+@import './components/Model.scss',
+ './components/test.scss',
+ './components/test.scss',
+        './components/button.scss',
+        './components/back.scss',
+        './components/card.scss';
+        
