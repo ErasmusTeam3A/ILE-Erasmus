@@ -7,6 +7,7 @@ $swatches: (
     'white': #fff,
     'red': #E24B12,
     'blue': #2680EB,
+    'gray': #717171,
 );
 
 // Map colors to components (only use these values in SCSS files!)
@@ -23,6 +24,7 @@ $colors: (
     'text': (
         'default': map-get-deep($swatches, 'black'),
         'accent': map-get-deep($swatches, 'blue'),
+        'gray': map-get-deep($swatches, 'gray'),
     ),
     'links': (
         'default': map-get-deep($swatches, 'black'),
