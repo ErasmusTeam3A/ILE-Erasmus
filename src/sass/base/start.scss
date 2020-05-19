@@ -1,0 +1,19 @@
+.start {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: green;
+    width: 100%;
+    height: 100%;
+
+    &__button-wrapper {
+        margin-bottom: 20px;
+    }
+
+    &__button-container {
+        width: 200px;
+        height: 300px;
+        background-color: red;
+        position: absolute;
+    }
+}

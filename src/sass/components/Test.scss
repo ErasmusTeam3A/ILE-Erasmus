@@ -4,6 +4,6 @@ body {
     font-family: unquote(map-get-deep($typo, 'font', 'head'));
 
     @include breakpoint('lg') {
-         background-color: map-get-deep($colors, 'brand', 'tertiary');
+
      }
 }
