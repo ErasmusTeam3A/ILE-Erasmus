@@ -33,4 +33,7 @@ map-get-deep($typo, 'base', 'md')
 
 // Components
 @import './components/test.scss',
-        './components/button.scss';
+        './components/button.scss',
+        './components/back.scss',
+        './components/card.scss';
+        
