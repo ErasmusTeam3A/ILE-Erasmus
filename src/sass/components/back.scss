@@ -1,0 +1,12 @@
+.back_button{
+    width: 100px;
+    height: 75px;
+    background-image: url('/icons/icons.png');
+    background-position: 0px 0px;
+    background-color: transparentize($color: #000000, $amount: 1);
+    border: 0px;
+
+    &:hover{
+        background-color: grayscale($color: #e7e7e7);
+    }
+}
