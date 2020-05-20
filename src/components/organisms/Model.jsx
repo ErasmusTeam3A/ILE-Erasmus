@@ -64,7 +64,7 @@ class Model extends React.Component {
        //freedomMesh.scale.set(0.02, 0.02, 0.02);
 
        geometry.center()
-       const material = new THREE.MeshLambertMaterial({color:0x99CC3B, ambient:0x99CC3B});
+       const material = new THREE.MeshStandardMaterial({color:0xffffff});
        const stlMesh = new THREE.Mesh(geometry, material);
 
        scene.add(stlMesh);
