@@ -58,14 +58,7 @@ class Model extends React.Component {
     gltfLoader.load(
      "/Pelvic-half.gltf",
      function(gltf) {
-       //freedomMesh = object;
-       ///freedomMesh.position.setY(3); //or  this
-       //freedomMesh.position.setX(-5); //or  this
-       //freedomMesh.scale.set(0.02, 0.02, 0.02);
-
-
        scene.add(gltf.scene);
-
      },
      function(xhr) {
        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
