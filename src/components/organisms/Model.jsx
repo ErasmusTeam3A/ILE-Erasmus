@@ -2,11 +2,12 @@ import React, { useRef } from "react";
 import * as THREE from "three";
 //import ObjectModel from 'react-three-renderer-objects';
 //import BodyModel from "../../objects/Pelvic-Ref-001.obj";
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import OBJLoader from "three-obj-loader";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+//import OBJLoader from "three-obj-loader";
 
 // STL
-import * as THREESTLLoader from 'three-stl-loader'
+//import * as THREESTLLoader from 'three-stl-loader'
 
 
 let freedomMesh;
@@ -50,24 +51,20 @@ class Model extends React.Component {
     scene.add(lights[1]);
     scene.add(lights[2]);
 
-    // load STL
+    // load GLTF
 
-    const STLLoader = new THREESTLLoader(THREE);
-    const stlloader = new STLLoader() // Removed THREE
+    const gltfLoader = new GLTFLoader() // Removed THREE
 
-    stlloader.load(
-     "/Pelvic.stl",
-     function(geometry) {
+    gltfLoader.load(
+     "/Pelvic-half.gltf",
+     function(gltf) {
        //freedomMesh = object;
        ///freedomMesh.position.setY(3); //or  this
        //freedomMesh.position.setX(-5); //or  this
        //freedomMesh.scale.set(0.02, 0.02, 0.02);
 
-       geometry.center()
-       const material = new THREE.MeshStandardMaterial({color:0xffffff});
-       const stlMesh = new THREE.Mesh(geometry, material);
 
-       scene.add(stlMesh);
+       scene.add(gltf.scene);
 
      },
      function(xhr) {
