@@ -5,6 +5,9 @@ import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import OBJLoader from "three-obj-loader";
 
+// STL
+import * as THREESTLLoader from 'three-stl-loader'
+
 
 let freedomMesh;
 let scene;
@@ -47,35 +50,36 @@ class Model extends React.Component {
     scene.add(lights[1]);
     scene.add(lights[2]);
 
-    // load Object
+    // load STL
 
-    const x = OBJLoader(THREE);
-    const y = new THREE.OBJLoader();
-    y.load(
-      "/Pelvic-Ref-001.obj",
-      function(object) {
-        freedomMesh = object;
-        freedomMesh.position.setY(3); //or  this
-        freedomMesh.position.setX(-5); //or  this
-        freedomMesh.scale.set(0.02, 0.02, 0.02);
-        scene.add(freedomMesh);
-      },
-      function(xhr) {
-        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      },
-      // called when loading has errors
-      function(error) {
-        console.log("An error happened" + error);
-      }
-    );
-    // objLoader.load("freedom.obj", function(object) {
-    //   freedomMesh = object;
-    //   freedomMesh.position.setY(3); //or  this
-    //   freedomMesh.scale.set(0.02, 0.02, 0.02);
-    //   scene.add(freedomMesh);
-    // });
+    const STLLoader = new THREESTLLoader(THREE);
+    const stlloader = new STLLoader() // Removed THREE
+
+    stlloader.load(
+     "/Pelvic.stl",
+     function(geometry) {
+       //freedomMesh = object;
+       ///freedomMesh.position.setY(3); //or  this
+       //freedomMesh.position.setX(-5); //or  this
+       //freedomMesh.scale.set(0.02, 0.02, 0.02);
+
+       geometry.center()
+       const material = new THREE.MeshLambertMaterial({color:0x99CC3B, ambient:0x99CC3B});
+       const stlMesh = new THREE.Mesh(geometry, material);
+
+       scene.add(stlMesh);
+
+     },
+     function(xhr) {
+       console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+     },
+     // called when loading has errors
+     function(error) {
+       console.log("An error happened" + error);
+     }
+   );
+
   }
-
 
   start = () => {
     if (!this.frameId) {
