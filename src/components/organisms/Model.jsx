@@ -71,6 +71,17 @@ class Model extends React.Component {
 
   }
 
+  resizeCanvasToDisplaySize = () => {
+    const canvas = this.renderer.domElement;
+    // look up the size the canvas is being displayed
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    
+     this.camera.aspect = width / height;
+     this.camera.updateProjectionMatrix();
+     this.renderer.setSize(width, height, false);
+  }
+
   start = () => {
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate);
@@ -78,6 +89,7 @@ class Model extends React.Component {
   };
 
   animate = () => {
+    this.resizeCanvasToDisplaySize();
     this.renderScene();
     this.frameId = window.requestAnimationFrame(this.animate);
   };
