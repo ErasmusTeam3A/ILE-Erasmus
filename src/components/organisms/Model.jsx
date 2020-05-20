@@ -4,6 +4,7 @@ import * as THREE from "three";
 //import BodyModel from "../../objects/Pelvic-Ref-001.obj";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 //import OBJLoader from "three-obj-loader";
 
 // STL
@@ -55,8 +56,12 @@ class Model extends React.Component {
 
     const gltfLoader = new GLTFLoader() // Removed THREE
 
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath( '/Pelvic-half.gltf' );
+    gltfLoader.setDRACOLoader( dracoLoader );
+
     gltfLoader.load(
-     "/Pelvic-half.gltf",
+     "/Pelvic-half.glb",
      function(gltf) {
        scene.add(gltf.scene);
      },
@@ -76,7 +81,7 @@ class Model extends React.Component {
     // look up the size the canvas is being displayed
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
-    
+
      this.camera.aspect = width / height;
      this.camera.updateProjectionMatrix();
      this.renderer.setSize(width, height, false);
