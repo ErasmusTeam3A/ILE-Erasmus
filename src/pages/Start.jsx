@@ -30,8 +30,6 @@ const Start = () => {
                         <div className="start__button-wrapper">
                             <Button link="/model" text="Afsluiten" />
                         </div>
-
-
                     </div>
                 </div>
             </div>
