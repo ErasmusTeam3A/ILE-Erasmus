@@ -15,6 +15,7 @@ $typo: (
     ),
     // line height
     'line-height': (
+        'h1-head':0,
         'text': 1.8,
         'head': 1.1,
     ),
@@ -49,6 +50,7 @@ $typo: (
         'xs': 32px,
         'sm': 40px,
         'md': 56px,
+        'lg': 120px,
     ),
     'h2': (
         'xs': 24px,
@@ -58,7 +60,7 @@ $typo: (
     'h3': (
         'xs': 21px,
         'sm': 21px,
-        'md': 24px,
+        'md': 27px,
     ),
     'h4': (
         'xs': 16px,
