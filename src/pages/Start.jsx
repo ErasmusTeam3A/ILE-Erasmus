@@ -8,21 +8,31 @@ const Start = () => {
     return (
         <div className="container">
             <div className="start">
-                <div className="start__button-container">
-                    <div className="start__button-wrapper">
-                        <Button text="Import dicom" />
+                <div className="start__content-wrapper">
+                    <div className="start__head-wrapper">
+                        <h1 className="">
+                            I.L.G.
+                        </h1>
+                        <h3>
+                            Interactive Leeromgeving Geneeskunde
+                        </h3>
                     </div>
-                    <div className="start__button-wrapper">
-                        <Button text="Selecteer lichaams onderdeel" />
+                    <div className="start__button-container">
+                        <div className="start__button-wrapper">
+                            <Button link="/model" text="Import dicom" />
+                        </div>
+                        <div className="start__button-wrapper">
+                            <Button link="/model" text="Selecteer lichaams onderdeel" />
+                        </div>
+                        <div className="start__button-wrapper">
+                            <Button link="/model" text="Recent geopend" />
+                        </div>
+                        <div className="start__button-wrapper">
+                            <Button link="/model" text="Afsluiten" />
+                        </div>
+
+
                     </div>
-                    <div className="start__button-wrapper">
-                        <Button text="Recent geopend" />
-                    </div>
-                    <div className="start__button-wrapper">
-                        <Button text="Afsluiten" />
-                    </div>
-                    <Back></Back>
-                    <Card title="Pelvis" opend="1 uur geleden" gender="V"></Card>
                 </div>
             </div>
         </div>
