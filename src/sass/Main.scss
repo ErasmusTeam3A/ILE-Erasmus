@@ -29,7 +29,8 @@ map-get-deep($typo, 'base', 'md')
 // Base styles
 @import
       './base/base.scss',
-      './base/start.scss';
+      './base/start.scss',
+      './base/interactive.scss';
 
 // Components
 @import './components/Model.scss',
@@ -37,5 +38,6 @@ map-get-deep($typo, 'base', 'md')
  './components/test.scss',
         './components/button.scss',
         './components/back.scss',
+        './components/Collapsible.scss',
         './components/card.scss';
         

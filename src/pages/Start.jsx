@@ -19,7 +19,7 @@ const Start = () => {
                     </div>
                     <div className="start__button-container">
                         <div className="start__button-wrapper">
-                            <Button link="/model" text="Import dicom" />
+                            <Button link="/interactive" text="Import dicom" />
                         </div>
                         <div className="start__button-wrapper">
                             <Button link="/model" text="Selecteer lichaams onderdeel" />
@@ -30,8 +30,6 @@ const Start = () => {
                         <div className="start__button-wrapper">
                             <Button link="/model" text="Afsluiten" />
                         </div>
-
-
                     </div>
                 </div>
             </div>
