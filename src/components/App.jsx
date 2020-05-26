@@ -9,7 +9,7 @@ import {
 // Components
 import Start from '../pages/Start';
 import Interactive from '../pages/Interactive';
-// import Model from './organisms/Model'
+import Model from './organisms/Model';
 
 class App extends React.Component {
   render() {
