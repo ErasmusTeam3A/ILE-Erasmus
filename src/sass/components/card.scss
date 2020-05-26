@@ -1,0 +1,48 @@
+.card{
+    position: relative;
+    width: 600px;
+    height: 175px;
+    border-right: 6px solid map-get-deep($swatches, 'blue');
+    border-left: 6px solid map-get-deep($swatches, 'blue');
+    box-sizing: border-box;
+    font-family: unquote(map-get-deep($typo, 'font', 'head'));
+    background: rgb(204,212,227);
+    background: linear-gradient(90deg, rgba(204,212,227,0.45) 0%, rgba(221,226,236,0.36) 50%, rgba(255,255,255,0) 100%);
+    transition: all 0.2s linear;
+    transition-property: height;
+    .left{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 70%;
+        height: 100%;
+        box-sizing: border-box;
+        padding-left: 1rem;
+        span{
+            color: map-get-deep($swatches   , 'gray');
+        }
+        .title{
+        font-weight: map-get-deep($typo, 'weight', 'bold');
+            font-size: map-get-deep($typo, 'h3', 'sm');
+        }
+    }
+    .right{
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 30%;
+        box-sizing: border-box;
+        height: 100px;
+        margin-top: calc(175px - 100px);
+        font-weight: map-get-deep($typo, 'weight', 'bold');
+        text-align: right;
+        padding-right: 1rem;
+        p span{
+            color: map-get-deep($swatches, 'blue');
+        }
+    }
+    &:hover{
+    //    height: 190px;
+    }
+}
+

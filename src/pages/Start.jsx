@@ -1,10 +1,38 @@
 import React from 'react';
+import Button from '../components/atoms/Button';
+import Back from '../components/atoms/Back';
+import Card from '../components/organisms/Card-resent';
+
 
 const Start = () => {
-    return(
-        <div>
-            Dit is de startpagina
-            <Model/>
+    return (
+        <div className="container">
+            <div className="start">
+                <div className="start__content-wrapper">
+                    <div className="start__head-wrapper">
+                        <h1 className="">
+                            I.L.G.
+                        </h1>
+                        <h3>
+                            Interactive Leeromgeving Geneeskunde
+                        </h3>
+                    </div>
+                    <div className="start__button-container">
+                        <div className="start__button-wrapper">
+                            <Button link="/interactive" text="Import dicom" />
+                        </div>
+                        <div className="start__button-wrapper">
+                            <Button link="/model" text="Selecteer lichaams onderdeel" />
+                        </div>
+                        <div className="start__button-wrapper">
+                            <Button link="/model" text="Recent geopend" />
+                        </div>
+                        <div className="start__button-wrapper">
+                            <Button link="/model" text="Afsluiten" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 };
