@@ -7,6 +7,7 @@
     &__trigger{
         font-size: unquote(map-get-deep($typo, 'h3', 'sm'));
         position: relative;
+        cursor: pointer;
         // border-left: 6px solid transparent;
 
         &::after{
