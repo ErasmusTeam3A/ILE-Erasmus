@@ -52,5 +52,5 @@
 
    // Helper to prevent repeating code
    @mixin spacer($attribute, $unit) {
-      #{$attribute}: map-get($spacing, $unit);
+      #{$attribute}: map-get($spaces, $unit);
    }
