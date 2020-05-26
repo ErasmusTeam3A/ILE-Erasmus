@@ -1,3 +1,7 @@
 node_modules/
 
 dist/Pelvic.stl
+dist/Pelvic-half.glb
+dist/Pelvic-Ref-001.obj
+dist/Pelvic-half.gltf
+src/objects/pelvic.stl
