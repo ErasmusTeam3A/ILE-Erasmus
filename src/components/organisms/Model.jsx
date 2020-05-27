@@ -1,14 +1,8 @@
 import React, { useRef } from "react";
 import * as THREE from "three";
-//import ObjectModel from 'react-three-renderer-objects';
-//import BodyModel from "../../objects/Pelvic-Ref-001.obj";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-//import OBJLoader from "three-obj-loader";
-
-// STL
-//import * as THREESTLLoader from 'three-stl-loader'
 
 
 let freedomMesh;
@@ -22,26 +16,41 @@ class Model extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloors) {
-      this.cameraPosition();
-      this.loadTexture();
-      this.loadGltf();
-      }
-  }
-
-  componentDidMount() {
-      this.cameraPosition();
-      this.loadTexture();
-      this.loadGltf();
-  }
-
   static getDerivedStateFromProps(nextProps, prevState) {
       //console.log(nextProps.zoomInPelvicFloor);
     if(nextProps.zoomInPelvicFloor!==prevState.zoomInPelvicFloor){
         return { zoomInPelvicFloor: nextProps.zoomInPelvicFloor};
     }
    else return null;
+  }
+
+  componentDidMount() {
+
+      // GETS EXECUTED ONCE! If u click on button it will NOT re-render componentDidMount
+      this.showGLTF();
+
+      //console.log("Did mount")
+      //console.log(this.state.zoomInPelvicFloor);
+
+      console.log(this.state.zoomInPelvicFloor);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
+          console.log("Update success");
+          const width = this.mount.clientWidth;
+          const height = this.mount.clientHeight;
+          this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
+          this.camera.position.set(0,2.5,2.5);
+            const controls = new OrbitControls(this.camera, this.renderer.domElement);
+    }
+  }
+
+
+  showGLTF = () => {
+    this.cameraPosition();
+    this.loadTexture();
+    this.loadGltf();
   }
 
   cameraPosition = (props) => {
@@ -58,7 +67,7 @@ class Model extends React.Component {
       // Set camera position when "Bekkenbodem" has been clicked
       if(this.state.zoomInPelvicFloor == true) {
           this.camera.position.set(0,2.5,2.5);
-          console.log("yooooo");
+          console.log("Works!!")
       } else {
           console.log("Not zooming in yet");
       }
@@ -156,7 +165,6 @@ class Model extends React.Component {
   };
 
   render() {
-    console.log(this.state.zoomInPelvicFloor)
     return (
       <div
         className="modelContainer"
