@@ -11,13 +11,12 @@ let scene;
 
 //camera
 
-
-
 class Model extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
         zoomInPelvicFloor: false,
+        zoomInCompartmentUterus: false
     }
   }
 
@@ -26,6 +25,11 @@ class Model extends React.Component {
     if(nextProps.zoomInPelvicFloor!==prevState.zoomInPelvicFloor){
         return { zoomInPelvicFloor: nextProps.zoomInPelvicFloor};
     }
+
+    if(nextProps.zoomInCompartmentUterus!==prevState.zoomInCompartmentUterus){
+        return { zoomInCompartmentUterus: nextProps.zoomInCompartmentUterus};
+    }
+
    else return null;
   }
 
@@ -36,8 +40,6 @@ class Model extends React.Component {
 
       //console.log("Did mount")
       //console.log(this.state.zoomInPelvicFloor);
-
-      console.log(this.state.zoomInPelvicFloor);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -46,10 +48,19 @@ class Model extends React.Component {
       this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
       const controls = new OrbitControls(this.camera, this.renderer.domElement);
 
+      console.log(this.state.zoomInCompartmentUterus);
+      console.log(this.state.zoomInPelvicFloor + "pelvic");
+
       if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
-            console.log("Update success");
+            console.log("Update pelvic floor success");
             this.camera.position.set(0,-2,5);
       }
+
+      if (prevState.zoomInCompartmentUterus !== this.state.zoomInCompartmentUterus) {
+            console.log("Update compartment success");
+            this.camera.position.set(0,-2, 20);
+      }
+
     // x = left, right y = back, front z = zoom in or out
     // if(prevState.zoomInUterus !== this.state.zoomInUterus) etc.
     // uterus:   this.camera.position.set(0,2.5,2.5);

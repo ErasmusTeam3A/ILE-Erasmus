@@ -9,11 +9,18 @@ class Interactive extends React.Component {
       super();
       this.state = {
           zoomInPelvicFloor: false,
+          zoomInCompartmentUterus: false
       }
     }
 
     zoomInPelvicFloor = () => {
-      this.setState({ zoomInPelvicFloor: true });
+      this.setState({ zoomInPelvicFloor: !this.state.zoomInPelvicFloor });
+      console.log("zoompelvic")
+    }
+
+    zoomInCompartmentUterus = () => {
+      this.setState({ zoomInCompartmentUterus:  !this.state.zoomInCompartmentUterus });
+      console.log("zoomuterus")
     }
 
     render() {
@@ -29,8 +36,7 @@ class Interactive extends React.Component {
                           <Collapsible transitionTime="300" classParentString="collaps" trigger="Bekken">
                               <ul>
                                   <li onClick={this.zoomInPelvicFloor}>Bekkenbodem</li>
-                                  <li>Ligamenten baarmoeder</li>
-                                  <li>Uturus</li>
+                                  <li onClick={this.zoomInCompartmentUterus}>Compartiment baarmoeder</li>
                               </ul>
                           </Collapsible>
                           <Collapsible transitionTime="300" classParentString="collaps" trigger="Bovenbenen">
