@@ -17,20 +17,35 @@ let scene;
 class Model extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
         zoomInPelvicFloor: false,
-        zoomInCompartmentUterus: false,
     }
-
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloors) {
+      this.cameraPosition();
+      this.loadTexture();
+      this.loadGltf();
+      }
+  }
+
   componentDidMount() {
-    this.cameraPosition();
-    this.loadTexture();
-    this.loadGltf();
+      this.cameraPosition();
+      this.loadTexture();
+      this.loadGltf();
   }
 
-  cameraPosition = () => {
+  static getDerivedStateFromProps(nextProps, prevState) {
+      //console.log(nextProps.zoomInPelvicFloor);
+    if(nextProps.zoomInPelvicFloor!==prevState.zoomInPelvicFloor){
+        return { zoomInPelvicFloor: nextProps.zoomInPelvicFloor};
+    }
+   else return null;
+  }
+
+  cameraPosition = (props) => {
+
       const width = this.mount.clientWidth;
       const height = this.mount.clientHeight;
       scene = new THREE.Scene();
@@ -41,10 +56,11 @@ class Model extends React.Component {
       //this.camera.position.set(0,2.5,2.5);
 
       // Set camera position when "Bekkenbodem" has been clicked
-      if(this.state.zoomInPelvicFloor == false) {
+      if(this.state.zoomInPelvicFloor == true) {
           this.camera.position.set(0,2.5,2.5);
+          console.log("yooooo");
       } else {
-          console.log("Not zooming in");
+          console.log("Not zooming in yet");
       }
 
       this.renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -140,6 +156,7 @@ class Model extends React.Component {
   };
 
   render() {
+    console.log(this.state.zoomInPelvicFloor)
     return (
       <div
         className="modelContainer"
