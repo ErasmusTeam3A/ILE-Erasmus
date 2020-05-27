@@ -5,8 +5,13 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 
 
+// global variables
 let freedomMesh;
 let scene;
+
+//camera
+
+
 
 class Model extends React.Component {
   constructor(props) {
@@ -36,14 +41,18 @@ class Model extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
-          console.log("Update success");
-          const width = this.mount.clientWidth;
-          const height = this.mount.clientHeight;
-          this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
-          this.camera.position.set(0,2.5,2.5);
-            const controls = new OrbitControls(this.camera, this.renderer.domElement);
-    }
+      const width = this.mount.clientWidth;
+      const height = this.mount.clientHeight;
+      this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
+      const controls = new OrbitControls(this.camera, this.renderer.domElement);
+
+      if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
+            console.log("Update success");
+            this.camera.position.set(0,-2,5);
+      }
+    // x = left, right y = back, front z = zoom in or out
+    // if(prevState.zoomInUterus !== this.state.zoomInUterus) etc.
+    // uterus:   this.camera.position.set(0,2.5,2.5);
   }
 
 
@@ -62,15 +71,7 @@ class Model extends React.Component {
       this.camera.position.z = 8;
       this.camera.position.y = 5;
 
-      //this.camera.position.set(0,2.5,2.5);
-
-      // Set camera position when "Bekkenbodem" has been clicked
-      if(this.state.zoomInPelvicFloor == true) {
-          this.camera.position.set(0,2.5,2.5);
-          console.log("Works!!")
-      } else {
-          console.log("Not zooming in yet");
-      }
+      this.camera.position.set(0,-2,8);
 
       this.renderer = new THREE.WebGLRenderer({ antialias: true });
       this.renderer.setClearColor("#263238");
