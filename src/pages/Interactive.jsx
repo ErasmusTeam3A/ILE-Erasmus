@@ -36,7 +36,7 @@ const Interactive = () => {
 
                 {/* <Back /> */}
                 {/* hier moet het model komen in plaats van <Model/>*/}
-                <Model test="yo" />
+                <Model />
             </div>
         </div>
     )
