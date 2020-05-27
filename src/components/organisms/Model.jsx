@@ -15,6 +15,16 @@ let freedomMesh;
 let scene;
 
 class Model extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        zoomInPelvicFloor: false,
+        zoomInCompartmentUterus: false,
+    }
+
+  }
   componentDidMount() {
     const width = this.mount.clientWidth;
     const height = this.mount.clientHeight;
@@ -22,6 +32,8 @@ class Model extends React.Component {
     this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
     this.camera.position.z = 8;
     this.camera.position.y = 5;
+
+    //this.camera.position.set(0,2.5,2.5);
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setClearColor("#263238");
