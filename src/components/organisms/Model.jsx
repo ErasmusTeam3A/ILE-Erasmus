@@ -16,7 +16,8 @@ class Model extends React.Component {
     super(props);
     this.state = {
         zoomInPelvicFloor: false,
-        zoomInCompartmentUterus: false
+        zoomInCompartmentUterus: false,
+        selectedFilter: 0
     }
   }
 
@@ -28,6 +29,10 @@ class Model extends React.Component {
 
     if(nextProps.zoomInCompartmentUterus!==prevState.zoomInCompartmentUterus){
         return { zoomInCompartmentUterus: nextProps.zoomInCompartmentUterus};
+    }
+
+    if(nextProps.selectedFilter!==prevState.selectedFilter){
+        return { selectedFilter: nextProps.selectedFilter};
     }
 
    else return null;
@@ -57,7 +62,10 @@ class Model extends React.Component {
       } else if(prevState.zoomInCompartmentUterus !== this.state.zoomInCompartmentUterus) {
             console.log("Update compartment success");
             this.camera.position.set(0, 0, 4);
-      } 
+      } else if(prevState.selectedFilter !== this.state.selectedFilter) {
+            this.loadGltf();
+            this.camera.position.set(0,-2,6);
+      }
 
       // x = left, right y = back, front z = zoom in or out
       // if(prevState.zoomInUterus !== this.state.zoomInUterus) etc.
@@ -66,9 +74,9 @@ class Model extends React.Component {
 
 
   showGLTF = () => {
-    this.cameraPosition();
-    this.loadTexture();
-    this.loadGltf();
+      this.cameraPosition();
+      this.loadTexture();
+      this.loadGltf();
   }
 
   cameraPosition = (props) => {
@@ -115,26 +123,48 @@ class Model extends React.Component {
 
   }
 
-  loadGltf = () => {
+  loadGltf = (props) => {
       const gltfLoader = new GLTFLoader() // Removed THREE
 
       const dracoLoader = new DRACOLoader();
-      dracoLoader.setDecoderPath( '/Pelvic-half.glb' );
+
+      if(this.props.gltfName) {
+          dracoLoader.setDecoderPath( this.props.gltfName);
+      } else {
+          dracoLoader.setDecoderPath("/Pelvic-half.glb");
+      }
+
       gltfLoader.setDRACOLoader( dracoLoader );
 
-      gltfLoader.load(
-       "/Pelvic-half.glb",
-       function(gltf) {
-         scene.add(gltf.scene);
-       },
-       function(xhr) {
-         console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-       },
-       // called when loading has errors
-       function(error) {
-         console.log("An error happened" + error);
-       }
-     );
+      if(this.props.gltfName) {
+          gltfLoader.load(
+            this.props.gltfName,      //"/Pelvic-half.glb",
+           function(gltf) {
+             scene.add(gltf.scene);
+           },
+           function(xhr) {
+             console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+           },
+           // called when loading has errors
+           function(error) {
+             console.log("An error happened" + error);
+           }
+         );
+      } else {
+        gltfLoader.load(
+          "/Pelvic-half.glb",      //"/Pelvic-half.glb",
+         function(gltf) {
+           scene.add(gltf.scene);
+         },
+         function(xhr) {
+           console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+         },
+         // called when loading has errors
+         function(error) {
+           console.log("An error happened" + error);
+         }
+       );
+      }
   }
 
   resizeCanvasToDisplaySize = () => {
@@ -175,6 +205,8 @@ class Model extends React.Component {
   };
 
   render() {
+
+    console.log(this.state)
     return (
       <div
         className="modelContainer"

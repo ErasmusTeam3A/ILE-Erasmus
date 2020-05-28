@@ -10,8 +10,9 @@ class Interactive extends React.Component {
       this.state = {
           zoomInPelvicFloor: false,
           zoomInCompartmentUterus: false,
-          filterNames: ["skin", "muscles", "arteries"],
-          selectedIndex: 0
+          filterNames: ["skin", "bones"],
+          selectedFilter: 0,
+          gltfName: ''
       }
     }
 
@@ -27,12 +28,14 @@ class Interactive extends React.Component {
 
     switchFilter = () => {
 
-     this.setState({ selectedIndex: (this.state.selectedIndex + 1) % this.state.filterNames.length });
+     this.setState({
+        selectedFilter: (this.state.selectedFilter + 1) % this.state.filterNames.length,
+        gltfName: '/Silhouette.glb'
+      });
 
     }
 
     render() {
-        console.log(this.state.selectedIndex)
       return (
           <div className="container">
               <div className="interactive">
@@ -67,7 +70,7 @@ class Interactive extends React.Component {
                   {/* <Back /> */}
                   {/* hier moet het model komen in plaats van <Model/>*/}
 
-                  <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} />
+                  <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} selectedFilter={this.state.selectedFilter} gltfName={this.state.gltfName} />
 
               </div>
           </div>
