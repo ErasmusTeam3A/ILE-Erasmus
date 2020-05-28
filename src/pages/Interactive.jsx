@@ -56,7 +56,7 @@ class Interactive extends React.Component {
                   {/* <Back /> */}
                   {/* hier moet het model komen in plaats van <Model/>*/}
 
-                  <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} />
+                  <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} />
 
               </div>
           </div>

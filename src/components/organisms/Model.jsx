@@ -58,7 +58,7 @@ class Model extends React.Component {
 
       if (prevState.zoomInCompartmentUterus !== this.state.zoomInCompartmentUterus) {
             console.log("Update compartment success");
-            this.camera.position.set(0,-2, 20);
+            this.camera.position.set(0, 0, 4);
       }
 
     // x = left, right y = back, front z = zoom in or out
