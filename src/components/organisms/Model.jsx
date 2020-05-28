@@ -54,16 +54,14 @@ class Model extends React.Component {
       if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
             console.log("Update pelvic floor success");
             this.camera.position.set(0,-2,5);
-      }
-
-      if (prevState.zoomInCompartmentUterus !== this.state.zoomInCompartmentUterus) {
+      } else if(prevState.zoomInCompartmentUterus !== this.state.zoomInCompartmentUterus) {
             console.log("Update compartment success");
             this.camera.position.set(0, 0, 4);
-      }
+      } 
 
-    // x = left, right y = back, front z = zoom in or out
-    // if(prevState.zoomInUterus !== this.state.zoomInUterus) etc.
-    // uterus:   this.camera.position.set(0,2.5,2.5);
+      // x = left, right y = back, front z = zoom in or out
+      // if(prevState.zoomInUterus !== this.state.zoomInUterus) etc.
+      // uterus:   this.camera.position.set(0,2.5,2.5);
   }
 
 
@@ -121,7 +119,7 @@ class Model extends React.Component {
       const gltfLoader = new GLTFLoader() // Removed THREE
 
       const dracoLoader = new DRACOLoader();
-      dracoLoader.setDecoderPath( '/Pelvic-half.gltf' );
+      dracoLoader.setDecoderPath( '/Pelvic-half.glb' );
       gltfLoader.setDRACOLoader( dracoLoader );
 
       gltfLoader.load(

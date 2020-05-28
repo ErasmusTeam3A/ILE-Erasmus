@@ -9,7 +9,9 @@ class Interactive extends React.Component {
       super();
       this.state = {
           zoomInPelvicFloor: false,
-          zoomInCompartmentUterus: false
+          zoomInCompartmentUterus: false,
+          filterNames: ["skin", "muscles", "arteries"],
+          selectedIndex: 0
       }
     }
 
@@ -23,8 +25,14 @@ class Interactive extends React.Component {
       console.log("zoomuterus")
     }
 
-    render() {
+    switchFilter = () => {
 
+     this.setState({ selectedIndex: (this.state.selectedIndex + 1) % this.state.filterNames.length });
+
+    }
+
+    render() {
+        console.log(this.state.selectedIndex)
       return (
           <div className="container">
               <div className="interactive">
@@ -51,6 +59,9 @@ class Interactive extends React.Component {
                           </Collapsible>
 
                       </Collapsible>
+
+                      <button className="interactive__filter-button" onClick={this.switchFilter}> Change filter </button>
+
                   </div>
 
                   {/* <Back /> */}
