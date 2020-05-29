@@ -1,1 +1,7 @@
 node_modules/
+
+dist/Pelvic-Ref-001.obj
+dist/Pelvic-half.glb
+dist/Pelvic-half.gltf
+dist/Pelvic.stl
+src/objects/
