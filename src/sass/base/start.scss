@@ -29,6 +29,7 @@
 
     &__head-wrapper{
         font-family: unquote(map-get-deep($typo, 'font', 'head'));
+        margin-bottom: 1rem;
         // position: absolute;
         // top: ;
         h1{

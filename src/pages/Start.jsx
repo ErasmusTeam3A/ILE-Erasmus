@@ -10,7 +10,7 @@ const Start = () => {
             <div className="start">
                 <div className="start__content-wrapper">
                     <div className="start__head-wrapper">
-                        <h1 className="">
+                        <h1>
                             I.L.G.
                         </h1>
                         <h3>
@@ -19,16 +19,16 @@ const Start = () => {
                     </div>
                     <div className="start__button-container">
                         <div className="start__button-wrapper">
-                            <Button link="/interactive" text="Import dicom" />
+                            <Button className="button" link="/interactive" text="Import dicom" />
                         </div>
                         <div className="start__button-wrapper">
-                            <Button link="/model" text="Selecteer lichaams onderdeel" />
+                            <Button className="button" link="/model" text="Selecteer lichaams onderdeel" />
                         </div>
                         <div className="start__button-wrapper">
-                            <Button link="/model" text="Recent geopend" />
+                            <Button className="button" link="/model" text="Recent geopend" />
                         </div>
                         <div className="start__button-wrapper">
-                            <Button link="/model" text="Afsluiten" />
+                            <Button className="button" link="/model" text="Afsluiten" />
                         </div>
                     </div>
                 </div>

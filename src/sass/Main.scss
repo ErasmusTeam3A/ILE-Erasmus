@@ -29,12 +29,14 @@ map-get-deep($typo, 'base', 'md')
 // Base styles
 @import
       './base/base.scss',
+      './base/custom-bootstrap.scss',
       './base/start.scss',
       './base/interactive.scss';
 
 // Components
 @import './components/Model.scss',
  './components/test.scss',
+ './components/Modal.scss',
  './components/test.scss',
         './components/button.scss',
         './components/back.scss',
