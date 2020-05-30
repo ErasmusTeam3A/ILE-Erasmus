@@ -9,6 +9,7 @@ import {
 // Components
 import Start from '../pages/Start';
 import Interactive from '../pages/Interactive';
+import Select from '../pages/Select';
 import Model from './organisms/Model';
 
 class App extends React.Component {
@@ -18,6 +19,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Start} />
           <Route exact path="/interactive" component={Interactive} />
+          <Route exact path="/select" component={Select} />
         </Switch>
       </Router>
     );

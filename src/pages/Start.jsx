@@ -22,7 +22,7 @@ const Start = () => {
                             <Button link="/interactive" text="Import dicom" />
                         </div>
                         <div className="start__button-wrapper">
-                            <Button link="/model" text="Selecteer lichaams onderdeel" />
+                            <Button link="/select" text="Selecteer lichaams onderdeel" />
                         </div>
                         <div className="start__button-wrapper">
                             <Button link="/model" text="Recent geopend" />
