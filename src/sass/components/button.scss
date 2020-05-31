@@ -9,4 +9,8 @@
     width: 200px;
     height: 48px;
     cursor: pointer;
+    &:disabled{
+        background-color: map-get-deep($colors, 'text', 'gray');
+        cursor: not-allowed;
+    }
 }
