@@ -1,6 +1,6 @@
 .card{
     position: relative;
-    width: 600px;
+    width: 100%;
     height: 175px;
     border-right: 6px solid map-get-deep($swatches, 'blue');
     border-left: 6px solid map-get-deep($swatches, 'blue');

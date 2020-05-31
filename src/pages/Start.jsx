@@ -25,7 +25,7 @@ const Start = () => {
                             <Button link="/select" text="Selecteer lichaams onderdeel" />
                         </div>
                         <div className="start__button-wrapper">
-                            <Button link="/model" text="Recent geopend" />
+                            <Button link="/recent" text="Recent geopend" />
                         </div>
                         <div className="start__button-wrapper">
                             <Button link="/model" text="Afsluiten" />
