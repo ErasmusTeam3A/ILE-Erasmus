@@ -31,7 +31,8 @@ map-get-deep($typo, 'base', 'md')
       './base/base.scss',
       './base/start.scss',
       './base/interactive.scss',
-      './base/recent.scss';
+      './base/recent.scss',
+      './base/select.scss';
 
 // Components
 @import './components/Model.scss',
