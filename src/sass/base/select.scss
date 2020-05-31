@@ -12,6 +12,7 @@
         margin: 0 auto;
         // max-width: 1080px;
         width: 100%;
+        
 
         .silhouette{
             display: block;
@@ -19,6 +20,20 @@
             margin: 0 auto;
             position: relative;
             height: 610px ;
+            
+
+        .silhouette-image{
+            height: 100%;
+            width: 100%;
+            background-size: contain;
+            &.hip{
+                background-image: url('/icons/human-hips.png');
+            }
+            &.body{
+                background-image: url('/icons/human.png');
+            }
+        }
+        
 
             img{
                 height: 100%;

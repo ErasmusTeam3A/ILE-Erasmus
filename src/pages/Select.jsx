@@ -7,11 +7,21 @@ import Button from '../components/atoms/Button';
 
 class Select extends React.Component{
     constructor(){
-        
+        super()
+        this.state = {
+            active: false,
+            image: "human",
+            toggleImage:false
+        }
     }
+
+toggleBox = () => {
+  this.setState(prevState => ({ toggleImage: !prevState.toggleImage }));
+};
 
     render() {
         let image = this.state.active ? {human} : {hips}
+        const { toggleImage } = this.state;
     return (
         <div className="container">
             <div className="select">
@@ -32,12 +42,16 @@ class Select extends React.Component{
                     </div>
 
                     <div className="silhouette">
+                    <div onClick={this.toggleBox} className={`silhouette-image ${toggleImage ? " hip" : " body"}`}>
+                        
+                    </div>
 
-                        <img src={ image } onClick={() => this.setState({active: !this.state.active})}></img>
+                        
+                        {/* <img src={this.state.image} onClick={() => this.setState({active: !this.state.active})}></img> */}
                     </div>
                     <div className="start__button-container">
                         <div className="start__button-wrapper">
-                            <Button link="/interactive" text="Start" />
+                            <Button link="/interactive" text="Start" disabled={toggleImage ? false : true} />
                         </div>
                     </div>
                 </div>
