@@ -53,9 +53,6 @@ class Model extends React.Component {
       this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
       const controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-      console.log(this.state.zoomInCompartmentUterus);
-      console.log(this.state.zoomInPelvicFloor + "pelvic");
-
       if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
             console.log("Update pelvic floor success");
             this.camera.position.set(0,-2,5);
@@ -128,17 +125,33 @@ class Model extends React.Component {
 
       const dracoLoader = new DRACOLoader();
 
-      if(this.props.gltfName) {
-          dracoLoader.setDecoderPath( this.props.gltfName);
-      } else {
-          dracoLoader.setDecoderPath("/Pelvic-half.glb");
-      }
+      const pelvicHalf = "/Pelvic-half.glb";
+      const silhouette = "/Silhouette.glb";
 
       gltfLoader.setDRACOLoader( dracoLoader );
 
-      if(this.props.gltfName) {
+      dracoLoader.setDecoderPath(pelvicHalf);
+
+      gltfLoader.load(
+        pelvicHalf,      //"/Pelvic-half.glb",
+       function(gltf) {
+         scene.add(gltf.scene);
+       },
+       function(xhr) {
+         console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+       },
+       // called when loading has errors
+       function(error) {
+         console.log("An error happened" + error);
+       }
+     );
+
+      if(this.props.selectedFilter == 0) {
+
+          dracoLoader.setDecoderPath(pelvicHalf);
+
           gltfLoader.load(
-            this.props.gltfName,      //"/Pelvic-half.glb",
+            "/Pelvic-half.glb",      //"/Pelvic-half.glb",
            function(gltf) {
              scene.add(gltf.scene);
            },
@@ -150,9 +163,16 @@ class Model extends React.Component {
              console.log("An error happened" + error);
            }
          );
+
+
+         console.log("BOOOOOT")
+
       } else {
+
+        dracoLoader.setDecoderPath(silhouette);
+
         gltfLoader.load(
-          "/Pelvic-half.glb",      //"/Pelvic-half.glb",
+          silhouette,      //"/Pelvic-half.glb",
          function(gltf) {
            scene.add(gltf.scene);
          },
@@ -164,7 +184,10 @@ class Model extends React.Component {
            console.log("An error happened" + error);
          }
        );
+
+              console.log("SKIIIIIN")
       }
+
   }
 
   resizeCanvasToDisplaySize = () => {
@@ -205,8 +228,6 @@ class Model extends React.Component {
   };
 
   render() {
-
-    console.log(this.state)
     return (
       <div
         className="modelContainer"

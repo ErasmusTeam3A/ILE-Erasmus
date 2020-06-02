@@ -16,12 +16,11 @@ class Interactive extends React.Component {
           zoomInCompartmentUterus: false,
           filterNames: ["skin", "bones"],
           selectedFilter: 0,
-            gltfName: '',
             isHidden: true,
             show: false
         }
         this.ToggleHidden = this.toggleHidden.bind(this)
-      
+
 
     }
 
@@ -40,19 +39,16 @@ class Interactive extends React.Component {
 
     zoomInPelvicFloor = () => {
       this.setState({ zoomInPelvicFloor: !this.state.zoomInPelvicFloor });
-      console.log("zoompelvic")
     }
 
     zoomInCompartmentUterus = () => {
       this.setState({ zoomInCompartmentUterus:  !this.state.zoomInCompartmentUterus });
-      console.log("zoomuterus")
     }
 
     switchFilter = () => {
 
      this.setState({
-        selectedFilter: (this.state.selectedFilter + 1) % this.state.filterNames.length,
-        gltfName: '/Silhouette.glb'
+        selectedFilter: (this.state.selectedFilter + 1) % this.state.filterNames.length
       });
 
     }
@@ -75,7 +71,6 @@ class Interactive extends React.Component {
                                 <ul>
                                     <li onClick={this.zoomInPelvicFloor}>Bekkenbodem</li>
                                     <li onClick={this.zoomInCompartmentUterus}>Compartiment baarmoeder</li>
-                                    <li onClick={this.ToggleHidden}>Uturus</li>
                                 </ul>
                             </Collapsible>
                             <Collapsible transitionTime={300} classParentString="collaps" trigger="Bovenbenen">
