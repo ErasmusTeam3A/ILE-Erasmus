@@ -27,6 +27,7 @@ module.exports = {
   },
   devServer: {
     open: true,
+    historyApiFallback: true,
     contentBase: './dist'
   },
 };
