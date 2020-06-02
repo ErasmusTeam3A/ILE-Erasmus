@@ -26,7 +26,7 @@ const Start = () => {
                         </div>
                         <div className="start__button-wrapper">
                             <Button link="/recent" text="Recent geopend" />
-                            <Button disabled={false} link="/model" text="Recent geopend" />
+                            
                         </div>
                         <div className="start__button-wrapper">
                             <Button disabled={false} link="/model" text="Afsluiten" />
