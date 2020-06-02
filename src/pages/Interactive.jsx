@@ -44,20 +44,20 @@ class Interactive extends React.Component {
                         <div className="interactive__menu-heading">
                             <h3>Menu</h3>
                         </div>
-                        <Collapsible transitionTime="300" classParentString="collaps" trigger="Onder Lichaam">
-                            <Collapsible transitionTime="300" classParentString="collaps" trigger="Bekken">
+                        <Collapsible transitionTime={300} classParentString="collaps" trigger="Onder Lichaam">
+                            <Collapsible transitionTime={300} classParentString="collaps" trigger="Bekken">
                                 <ul>
                                     <li onClick={this.ToggleHidden}>Bekkenbodem</li>
                                     <li>Ligamenten baarmoeder</li>
                                     <li>Uturus</li>
                                 </ul>
                             </Collapsible>
-                            <Collapsible transitionTime="300" classParentString="collaps" trigger="Bovenbenen">
+                            <Collapsible transitionTime={300} classParentString="collaps" trigger="Bovenbenen">
                                 <ul>
                                     <li>Ligamenten baarmoeder</li>
                                 </ul>
                             </Collapsible>
-                            <Collapsible transitionTime="300" classParentString="collaps" trigger="Voeten">
+                            <Collapsible transitionTime={300} classParentString="collaps" trigger="Voeten">
                                 <ul>
                                     <li>Uturus</li>
                                 </ul>
