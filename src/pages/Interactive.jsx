@@ -10,30 +10,38 @@ import data from '../../dist/data/data.json'
 
 class Interactive extends React.Component {
     constructor() {
-        super()
-        this.state = {
-            isHidden: true,
-            show: false
-        }
-        this.ToggleHidden = this.toggleHidden.bind(this)
+      super();
+      this.state = {
+          zoomInPelvicFloor: false,
+          zoomInCompartmentUterus: false,
+          filterNames: ["skin", "bones"],
+          selectedFilter: 0,
+          gltfName: ''
+      }
     }
 
-    showModal = e => {
-        this.setState({
-            show: !this.state.show
-        });
-    };
+    zoomInPelvicFloor = () => {
+      this.setState({ zoomInPelvicFloor: !this.state.zoomInPelvicFloor });
+      console.log("zoompelvic")
+    }
 
-    toggleHidden() {
+    zoomInCompartmentUterus = () => {
+      this.setState({ zoomInCompartmentUterus:  !this.state.zoomInCompartmentUterus });
+      console.log("zoomuterus")
+    }
 
-        this.setState({
-            isHidden: !this.state.isHidden
-        })
+    switchFilter = () => {
+
+     this.setState({
+        selectedFilter: (this.state.selectedFilter + 1) % this.state.filterNames.length,
+        gltfName: '/Silhouette.glb'
+      });
+
     }
 
     render() {
-        return (
-            <div className="container" >
+      return (
+          <div className="container" >
                 <div className="interactive">
                     <div className="interactive__heading">
                         <h2><span>Weergave van:</span><br />
@@ -47,9 +55,9 @@ class Interactive extends React.Component {
                         <Collapsible transitionTime={300} classParentString="collaps" trigger="Onder Lichaam">
                             <Collapsible transitionTime={300} classParentString="collaps" trigger="Bekken">
                                 <ul>
-                                    <li onClick={this.ToggleHidden}>Bekkenbodem</li>
-                                    <li>Ligamenten baarmoeder</li>
-                                    <li>Uturus</li>
+                                    <li onClick={this.zoomInPelvicFloor}>Bekkenbodem</li>
+                                    <li onClick={this.zoomInCompartmentUterus}>Compartiment baarmoeder</li>
+                                    <li onClick={this.ToggleHidden}>Uturus</li>
                                 </ul>
                             </Collapsible>
                             <Collapsible transitionTime={300} classParentString="collaps" trigger="Bovenbenen">
@@ -82,15 +90,15 @@ class Interactive extends React.Component {
 
                     </div>
                     <Modal onClose={this.showModal} show={this.state.show} content={data}></Modal>
-
+                    <button className="interactive__filter-button" onClick={this.switchFilter}> Change filter </button>
                     {/* <Back /> */}
                     {/* hier moet het model komen in plaats van <Model/>*/}
-                    <Model />
+                    <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} selectedFilter={this.state.selectedFilter} gltfName={this.state.gltfName} />
                 </div>
             </div>
-        )
+      )
     }
-}
 
+}
 
 export default Interactive;
