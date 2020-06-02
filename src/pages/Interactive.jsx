@@ -16,8 +16,26 @@ class Interactive extends React.Component {
           zoomInCompartmentUterus: false,
           filterNames: ["skin", "bones"],
           selectedFilter: 0,
-          gltfName: ''
-      }
+            gltfName: '',
+            isHidden: true,
+            show: false
+        }
+        this.ToggleHidden = this.toggleHidden.bind(this)
+      
+
+    }
+
+    showModal = e => {
+        this.setState({
+            show: !this.state.show
+        });
+    };
+
+    toggleHidden() {
+
+        this.setState({
+            isHidden: !this.state.isHidden
+        })
     }
 
     zoomInPelvicFloor = () => {
@@ -73,24 +91,20 @@ class Interactive extends React.Component {
 
                         </Collapsible>
                         <div className="interactive__menu-filter">
-                            <Button link="#" className="button button-side-left" text="filter"></Button>
+                            {/* <Button link="#" className="button button-side-left" text="filter"></Button> */}
+                            <button className="button button-side-left" onClick={this.switchFilter}> Change filter </button>
+
                         </div>
                     </div>
                     <div className="interactive__side-menu">
-                        <button
-                            className="button button-side-right"
-                            id="centered-toggle-button"
-                            onClick={e => {
-                                this.showModal(e);
-                            }}
-                        >
+                        <button className="button button-side-right" id="centered-toggle-button" onClick={e => {this.showModal(e);}}>
                             {/* {" "} */}
                         show Modal{" "}
                         </button>
 
                     </div>
                     <Modal onClose={this.showModal} show={this.state.show} content={data}></Modal>
-                    <button className="interactive__filter-button" onClick={this.switchFilter}> Change filter </button>
+                    {/* <button className="interactive__filter-button" onClick={this.switchFilter}> Change filter </button> */}
                     {/* <Back /> */}
                     {/* hier moet het model komen in plaats van <Model/>*/}
                     <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} selectedFilter={this.state.selectedFilter} gltfName={this.state.gltfName} />
