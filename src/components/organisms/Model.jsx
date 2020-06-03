@@ -17,7 +17,9 @@ class Model extends React.Component {
     this.state = {
         zoomInPelvicFloor: false,
         zoomInCompartmentUterus: false,
-        selectedFilter: 0
+        selectedFilter: 0,
+        selectedSkin: false,
+        selectedPelvic: false
     }
   }
 
@@ -62,6 +64,22 @@ class Model extends React.Component {
       } else if(prevState.selectedFilter !== this.state.selectedFilter) {
             this.loadGltf();
             this.camera.position.set(0,-2,6);
+
+
+            // Reset scene
+
+            //while(scene.children.length > 0){
+              //scene.remove(scene.children[0]);
+            //}
+
+            scene.children.slice(3).map((newchildren) => {
+                //console.log(newchildren);
+
+                scene.remove(newchildren);
+            })
+
+      } else {
+          this.camera.position.set(0,-2,5);
       }
 
       // x = left, right y = back, front z = zoom in or out
@@ -130,28 +148,12 @@ class Model extends React.Component {
 
       gltfLoader.setDRACOLoader( dracoLoader );
 
-      dracoLoader.setDecoderPath(pelvicHalf);
-
-      gltfLoader.load(
-        pelvicHalf,      //"/Pelvic-half.glb",
-       function(gltf) {
-         scene.add(gltf.scene);
-       },
-       function(xhr) {
-         console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-       },
-       // called when loading has errors
-       function(error) {
-         console.log("An error happened" + error);
-       }
-     );
-
       if(this.props.selectedFilter == 0) {
 
-          dracoLoader.setDecoderPath(pelvicHalf);
+          dracoLoader.setDecoderPath(silhouette);
 
           gltfLoader.load(
-            "/Pelvic-half.glb",      //"/Pelvic-half.glb",
+              silhouette,      //"/Pelvic-half.glb",
            function(gltf) {
              scene.add(gltf.scene);
            },
@@ -164,15 +166,17 @@ class Model extends React.Component {
            }
          );
 
+        this.setState({ selectedSkin: true })
+         console.log("SKIIIIN")
 
-         console.log("BOOOOOT")
+      }
 
-      } else {
+      if(this.props.selectedFilter == 1) {
 
-        dracoLoader.setDecoderPath(silhouette);
+        dracoLoader.setDecoderPath(pelvicHalf);
 
         gltfLoader.load(
-          silhouette,      //"/Pelvic-half.glb",
+          pelvicHalf,      //"/Pelvic-half.glb",
          function(gltf) {
            scene.add(gltf.scene);
          },
@@ -184,10 +188,9 @@ class Model extends React.Component {
            console.log("An error happened" + error);
          }
        );
-
-              console.log("SKIIIIIN")
+             this.setState({ selectedPelvic: true })
+              console.log("BOOOOT")
       }
-
   }
 
   resizeCanvasToDisplaySize = () => {
