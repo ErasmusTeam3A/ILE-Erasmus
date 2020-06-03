@@ -67,7 +67,8 @@ class Model extends React.Component {
 
             // Reset scene, but skip first three elements in scene.children array because those elements are lightning, shadow.
             scene.children.slice(3).map((newchildren) => {
-                scene.remove(newchildren);
+            scene.remove(newchildren);
+
             })
       } else {
 
@@ -81,8 +82,7 @@ class Model extends React.Component {
       }
 
       // x = left, right y = back, front z = zoom in or out
-      // if(prevState.zoomInUterus !== this.state.zoomInUterus) etc.
-      // uterus:   this.camera.position.set(0,2.5,2.5);
+
   }
 
 
@@ -104,7 +104,7 @@ class Model extends React.Component {
       this.camera.position.set(0,-2,8);
 
       this.renderer = new THREE.WebGLRenderer({ antialias: true });
-      this.renderer.setClearColor("#263238");
+      this.renderer.setClearColor("#ffffff");
       this.renderer.setSize(width, height);
       this.mount.appendChild(this.renderer.domElement);
 
@@ -151,7 +151,7 @@ class Model extends React.Component {
           dracoLoader.setDecoderPath(silhouette);
 
           gltfLoader.load(
-                silhouette,    
+                silhouette,
              function(gltf) {
                scene.add(gltf.scene);
              },
