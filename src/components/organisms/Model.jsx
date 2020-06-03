@@ -65,21 +65,19 @@ class Model extends React.Component {
             this.loadGltf();
             this.camera.position.set(0,-2,6);
 
-
-            // Reset scene
-
-            //while(scene.children.length > 0){
-              //scene.remove(scene.children[0]);
-            //}
-
+            // Reset scene, but skip first three elements in scene.children array because those elements are lightning, shadow.
             scene.children.slice(3).map((newchildren) => {
-                //console.log(newchildren);
-
                 scene.remove(newchildren);
             })
-
       } else {
-          this.camera.position.set(0,-2,5);
+
+          // Default camera position
+          if(this.state.selectedFilter == 0) {
+              this.camera.position.set(0,-2,10);
+          } else {
+              this.camera.position.set(0,-2,7);
+          }
+
       }
 
       // x = left, right y = back, front z = zoom in or out
@@ -153,43 +151,42 @@ class Model extends React.Component {
           dracoLoader.setDecoderPath(silhouette);
 
           gltfLoader.load(
-              silhouette,      //"/Pelvic-half.glb",
-           function(gltf) {
-             scene.add(gltf.scene);
-           },
-           function(xhr) {
-             console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-           },
-           // called when loading has errors
-           function(error) {
-             console.log("An error happened" + error);
-           }
-         );
+                silhouette,    
+             function(gltf) {
+               scene.add(gltf.scene);
+             },
+             function(xhr) {
+               console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+             },
+             // called when loading has errors
+             function(error) {
+               console.log("An error happened" + error);
+             }
+          );
 
-        this.setState({ selectedSkin: true })
-         console.log("SKIIIIN")
-
+          this.setState({ selectedSkin: true })
       }
 
       if(this.props.selectedFilter == 1) {
 
-        dracoLoader.setDecoderPath(pelvicHalf);
+      dracoLoader.setDecoderPath(pelvicHalf);
 
-        gltfLoader.load(
-          pelvicHalf,      //"/Pelvic-half.glb",
-         function(gltf) {
-           scene.add(gltf.scene);
-         },
-         function(xhr) {
-           console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-         },
-         // called when loading has errors
-         function(error) {
-           console.log("An error happened" + error);
-         }
-       );
-             this.setState({ selectedPelvic: true })
-              console.log("BOOOOT")
+          gltfLoader.load(
+              pelvicHalf,      //"/Pelvic-half.glb",
+             function(gltf) {
+               scene.add(gltf.scene);
+             },
+             function(xhr) {
+               console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+             },
+             // called when loading has errors
+             function(error) {
+               console.log("An error happened" + error);
+             }
+          );
+
+           this.setState({ selectedPelvic: true })
+
       }
   }
 
