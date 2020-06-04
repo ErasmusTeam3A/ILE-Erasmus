@@ -1,5 +1,7 @@
 import React from 'react';
 import Model from '../components/organisms/Model';
+import ControllerTest from '../components/organisms/ControllerTest';
+
 import Back from '../components/atoms/Back';
 import Button from '../components/atoms/Button';
 import Collapsible from 'react-collapsible';
@@ -108,13 +110,13 @@ class Interactive extends React.Component {
                             {/* {" "} */}
                         show Modal{" "}
                         </button>
-
                     </div>
-                    <Modal onClose={this.showModal} show={this.state.show} content={data}></Modal>
+                    <Modal onClose={this.showModal} show={this.state.show} content={data}></Modal> 
                     {/* <button className="interactive__filter-button" onClick={this.switchFilter}> Change filter </button> */}
                     {/* <Back /> */}
                     {/* hier moet het model komen in plaats van <Model/>*/}
                     <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} selectedFilter={this.state.selectedFilter} gltfName={this.state.gltfName} connected={this.state.connected} />
+                    {/* <ControllerTest connected={this.state.connected} /> */}
                 </div>
             </div>
       )

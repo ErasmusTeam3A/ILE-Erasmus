@@ -9,7 +9,7 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 let freedomMesh;
 let scene;
 
-//camera
+// Controller variables 
 
 class Model extends React.Component {
   constructor(props) {
@@ -96,11 +96,88 @@ class Model extends React.Component {
       if(this.state.connectedController == true) {
           console.log("Connected!");
 
-      } else {
-          console.log("Disconnected!");
+          this.connect();
 
+      } else {
+          this.disconnect();
+          console.log(this.state.connectedController);
+          console.log("Disconnected!")
       }
   }
+
+  connect = () => {
+
+      let myDevice;
+      const myService = 0xffb0;        // fill in a service you're looking for here
+      const myCharacteristic = 0xffb2;  // fill in a characteristic from the service here
+
+      navigator.bluetooth.requestDevice({
+        // filters: [myFilters]       // you can't use filters and acceptAllDevices together
+        optionalServices: [myService],
+        acceptAllDevices: true
+      })
+      .then(function(device) {
+        // save the device returned so you can disconnect later:
+        myDevice = device;
+
+        // connect to the device once you find it:
+       
+        if(!device.gatt.connect()) {
+          console.log("OEI")
+        } else {
+          return device.gatt.connect(); 
+        }
+
+      })
+      .then(function(server) {
+        // get the primary service:
+        return server.getPrimaryService(myService);
+      })
+      .then(function(service) {
+        // get the  characteristic:
+        return service.getCharacteristics();
+    
+      })
+      .then(function(characteristics) {
+        // subscribe to the characteristic:
+        
+      let arr = ['el1', 'el2', 'el3'];
+    
+      for (let c in characteristics) {
+          characteristics[c].startNotifications()
+          .then(function(characteristic) {
+              characteristic.oncharacteristicvaluechanged = function() {
+                  // get the data buffer from the meter:
+                  const buf = new Uint8Array(event.target.value);
+                  console.log(buf);
+              }
+          });
+       }
+
+      })
+      .catch(function(error) {
+        // catch any errors:
+        console.error('Connection failed!', error);
+      });
+  }
+
+  disconnect = () => {
+    let myDevice;
+    const myService = 0xffb0;        // fill in a service you're looking for here
+    const myCharacteristic = 0xffb2;  // fill in a characteristic from the service here
+
+
+      // disconnect function:
+    if (myDevice) {
+      // disconnect:
+      myDevice.gatt.disconnect();
+    }
+
+
+    console.log("disconnected");
+  
+  }
+
 
   showGLTF = () => {
       this.cameraPosition();
@@ -244,8 +321,6 @@ class Model extends React.Component {
   };
 
   render() {
-    console.log(this.state.connectedController);
-
     return (
       <div
         className="modelContainer"
