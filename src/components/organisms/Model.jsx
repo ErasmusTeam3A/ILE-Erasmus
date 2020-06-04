@@ -19,7 +19,8 @@ class Model extends React.Component {
         zoomInCompartmentUterus: false,
         selectedFilter: 0,
         selectedSkin: false,
-        selectedPelvic: false
+        selectedPelvic: false,
+        connectedController: false
     }
   }
 
@@ -37,6 +38,10 @@ class Model extends React.Component {
         return { selectedFilter: nextProps.selectedFilter};
     }
 
+    if(nextProps.connected!==prevState.connected){
+      return { connectedController: nextProps.connected};
+    }
+
    else return null;
   }
 
@@ -44,9 +49,7 @@ class Model extends React.Component {
 
       // GETS EXECUTED ONCE! If u click on button it will NOT re-render componentDidMount
       this.showGLTF();
-
-      //console.log("Did mount")
-      //console.log(this.state.zoomInPelvicFloor);
+      this.connectController();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -70,7 +73,11 @@ class Model extends React.Component {
             scene.remove(newchildren);
 
             })
-      } else {
+      } else if(prevState.connectedController !== this.state.connectedController) {
+          this.connectController();
+      }
+      
+      else {
 
           // Default camera position
           if(this.state.selectedFilter == 0) {
@@ -85,6 +92,15 @@ class Model extends React.Component {
 
   }
 
+  connectController = () => {
+      if(this.state.connectedController == true) {
+          console.log("Connected!");
+
+      } else {
+          console.log("Disconnected!");
+
+      }
+  }
 
   showGLTF = () => {
       this.cameraPosition();
@@ -228,6 +244,8 @@ class Model extends React.Component {
   };
 
   render() {
+    console.log(this.state.connectedController);
+
     return (
       <div
         className="modelContainer"
