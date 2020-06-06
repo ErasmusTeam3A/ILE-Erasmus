@@ -10,6 +10,9 @@ let freedomMesh;
 let scene;
 
 // Controller variables 
+let myDevice;
+const myService = 0xffb0;        // fill in a service you're looking for here
+const myCharacteristic = 0x2AB3; 
 
 class Model extends React.Component {
   constructor(props) {
@@ -20,7 +23,10 @@ class Model extends React.Component {
         selectedFilter: 0,
         selectedSkin: false,
         selectedPelvic: false,
-        connectedController: false
+        connectedController: false,
+        x: 0,
+        y: 0,
+        z: 0
     }
   }
 
@@ -52,7 +58,7 @@ class Model extends React.Component {
       this.connectController();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+      componentDidUpdate(prevProps, prevState) {
       const width = this.mount.clientWidth;
       const height = this.mount.clientHeight;
       this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
@@ -95,71 +101,80 @@ class Model extends React.Component {
   connectController = () => {
       if(this.state.connectedController == true) {
           console.log("Connected!");
-
           this.connect();
 
       } else {
           this.disconnect();
-          console.log(this.state.connectedController);
           console.log("Disconnected!")
       }
   }
 
-  connect = () => {
+ connect = () => {
 
-      let myDevice;
-      const myService = 0xffb0;        // fill in a service you're looking for here
-      const myCharacteristic = 0xffb2;  // fill in a characteristic from the service here
+  let x = {};
+  let y = {};
+  let z = {};
+  let currentStateX = this.state.x;
+  let currentStateY = this.state.y;
+  let currentStateZ = this.state.z;
 
-      navigator.bluetooth.requestDevice({
-        // filters: [myFilters]       // you can't use filters and acceptAllDevices together
-        optionalServices: [myService],
-        acceptAllDevices: true
-      })
-      .then(function(device) {
-        // save the device returned so you can disconnect later:
-        myDevice = device;
+   navigator.bluetooth.requestDevice({
+      // filters: [myFilters]       // you can't use filters and acceptAllDevices together
+      optionalServices: [myService],
+      acceptAllDevices: true
+  })
+  .then(function(device) {
+      // save the device returned so you can disconnect later:
+      myDevice = device;
 
-        // connect to the device once you find it:
-       
-        if(!device.gatt.connect()) {
-          console.log("OEI")
-        } else {
-          return device.gatt.connect(); 
-        }
+      // connect to the device once you find it:
+      
+      if(!device.gatt.connect()) {
+        console.log("OEI")
+      } else {
+        return device.gatt.connect(); 
+      }
+  })
+  .then(function(server) {
+    // get the primary service:
+    return server.getPrimaryService(myService);
+  })
+  .then(function(service) {
+      // get the  characteristic:
+      return service.getCharacteristics();
 
-      })
-      .then(function(server) {
-        // get the primary service:
-        return server.getPrimaryService(myService);
-      })
-      .then(function(service) {
-        // get the  characteristic:
-        return service.getCharacteristics();
-    
-      })
-      .then(function(characteristics) {
-        // subscribe to the characteristic:
-        
-      let arr = ['el1', 'el2', 'el3'];
-    
+  })
+  .then(function(characteristics) {
+
+      // subscribe to the characteristic:
+
       for (let c in characteristics) {
           characteristics[c].startNotifications()
           .then(function(characteristic) {
-              characteristic.oncharacteristicvaluechanged = function() {
+              characteristic.oncharacteristicvaluechanged = function(event) {
                   // get the data buffer from the meter:
-                  const buf = new Uint8Array(event.target.value);
-                  console.log(buf);
+                  var xRotation = event.target.value.getFloat32(0,true); 
+                  var yRotation = event.target.value.getFloat32(4,true);
+                  var zRotation = event.target.value.getFloat32(8,true);
+
+                  //x.push(xRotation);
+                  x[currentStateX] = xRotation;
+                  y[currentStateY] = yRotation;
+                  z[currentStateZ] = zRotation;
+
               }
           });
-       }
+      } 
+  })
 
-      })
-      .catch(function(error) {
-        // catch any errors:
-        console.error('Connection failed!', error);
-      });
-  }
+  .catch(function(error) {
+      // catch any errors:
+      console.error('Connection failed!', error);
+  });
+
+  this.setState({ x: x, y: y, z: z});
+
+}
 
   disconnect = () => {
     let myDevice;
@@ -321,6 +336,7 @@ class Model extends React.Component {
   };
 
   render() {
+    console.log(this.state)
     return (
       <div
         className="modelContainer"
