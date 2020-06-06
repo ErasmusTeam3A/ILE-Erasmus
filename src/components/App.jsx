@@ -12,6 +12,7 @@ import Start from '../pages/Start';
 import Interactive from '../pages/Interactive';
 import Select from '../pages/Select';
 import Recent from '../pages/recent';
+import Dicom from '../pages/dicom';
 import Model from './organisms/Model';
 
 const history = createBrowserHistory();
@@ -24,6 +25,7 @@ class App extends React.Component {
           <Route exact path="/interactive" component={Interactive} />
           <Route exact path="/select" component={Select} />
           <Route exact path="/recent" component={Recent} />
+          <Route exact path="/dicom" component={Dicom} />
         </Switch>
       </Router>
     );
