@@ -26,7 +26,7 @@
             font-weight: map-get-deep($typo, 'weight', 'bold');
             font-size: map-get-deep($typo, 'h3', 'md');
             margin-bottom: 20px;
-
+            text-transform: uppercase;
         }
 
         span{
