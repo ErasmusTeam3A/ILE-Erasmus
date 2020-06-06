@@ -52,7 +52,6 @@ class Model extends React.Component {
   }
 
   componentDidMount() {
-
       // GETS EXECUTED ONCE! If u click on button it will NOT re-render componentDidMount
       this.showGLTF();
       this.connectController();
@@ -81,6 +80,7 @@ class Model extends React.Component {
             })
       } else if(prevState.connectedController !== this.state.connectedController) {
           this.connectController();
+          this.connect();
       }
       
       else {
@@ -111,69 +111,77 @@ class Model extends React.Component {
 
  connect = () => {
 
-  let x = {};
-  let y = {};
-  let z = {};
-  let currentStateX = this.state.x;
-  let currentStateY = this.state.y;
-  let currentStateZ = this.state.z;
 
-   navigator.bluetooth.requestDevice({
+  navigator.bluetooth.requestDevice({
       // filters: [myFilters]       // you can't use filters and acceptAllDevices together
       optionalServices: [myService],
       acceptAllDevices: true
   })
-  .then(function(device) {
+  .then((device) => {
       // save the device returned so you can disconnect later:
       myDevice = device;
 
       // connect to the device once you find it:
       
       if(!device.gatt.connect()) {
-        console.log("OEI")
+        console.log('no connection')
       } else {
         return device.gatt.connect(); 
       }
   })
-  .then(function(server) {
-    // get the primary service:
-    return server.getPrimaryService(myService);
+  .then((server) => {
+      // get the primary service:
+      return server.getPrimaryService(myService);
   })
-  .then(function(service) {
-      // get the  characteristic:
-      return service.getCharacteristics();
+  .then((service) => {
+    // get the  characteristic:
+    return service.getCharacteristics();
 
   })
-  .then(function(characteristics) {
+  .then((characteristics) => {
 
       // subscribe to the characteristic:
-
       for (let c in characteristics) {
           characteristics[c].startNotifications()
-          .then(function(characteristic) {
-              characteristic.oncharacteristicvaluechanged = function(event) {
-                  // get the data buffer from the meter:
-                  var xRotation = event.target.value.getFloat32(0,true); 
-                  var yRotation = event.target.value.getFloat32(4,true);
-                  var zRotation = event.target.value.getFloat32(8,true);
+          .then(this.subscribeToChanges)
+          // .then ((characteristic) =>  {
+          //       characteristic.oncharacteristicvaluechanged = (event) => {
+          //         // get the data buffer from the meter:
+          //         var xRotation = event.target.value.getFloat32(0,true); 
+          //         var yRotation = event.target.value.getFloat32(4,true);
+          //         var zRotation = event.target.value.getFloat32(8,true);
 
-                  //x.push(xRotation);
-                  x[currentStateX] = xRotation;
-                  y[currentStateY] = yRotation;
-                  z[currentStateZ] = zRotation;
+          //         x[currentStateX] = xRotation;
+          //         y[currentStateY] = yRotation;
+          //         z[currentStateZ] = zRotation;
 
-              }
-          });
+          //     }
+          //     this.setState({ x: x[0], y: y, z: z});
+          // });
       } 
+
+  })
+  .catch((error) => {
+    console.error('Connection failed!', error)
   })
 
-  .catch(function(error) {
-      // catch any errors:
-      console.error('Connection failed!', error);
-  });
 
-  this.setState({ x: x, y: y, z: z});
+}
 
+subscribeToChanges = (characteristic) => {
+  characteristic.oncharacteristicvaluechanged = this.handleData
+}
+
+handleData = (event) => {
+
+  var xRotation = event.target.value.getFloat32(0,true); 
+  var yRotation = event.target.value.getFloat32(4,true);
+  var zRotation = event.target.value.getFloat32(8,true);
+
+  this.setState({ x: xRotation, y: yRotation, z: zRotation});
+
+  console.log(this.state.x, this.state.y, this.state.z);
+  
 }
 
   disconnect = () => {
@@ -336,7 +344,6 @@ class Model extends React.Component {
   };
 
   render() {
-    console.log(this.state)
     return (
       <div
         className="modelContainer"
