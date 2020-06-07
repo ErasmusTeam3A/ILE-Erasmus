@@ -8,6 +8,7 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 // global variables
 let freedomMesh;
 let scene;
+let model;
 
 // Controller variables 
 let myDevice;
@@ -80,11 +81,16 @@ class Model extends React.Component {
       } else if(prevState.connectedController !== this.state.connectedController) {
           this.connectController();
       } else if(prevState.x !== this.state.x && prevState.y !== this.state.y && prevState.z !== this.state.z) {
-        //console.log("ya");
-        //console.log(this.state.x, this.state.y, this.state.z)
+          //console.log(model)
+          //console.log(model.rotation.x)
+          //model.rotation.x = -300;
+          //console.log(model.rotation.x)
 
-        console.log("test");
+          model.rotation.x = this.state.x;
+          model.rotation.y = this.state.y;
+          model.rotation.z = this.state.z;
 
+          //console.log(model.rotation.x, model.rotation.y, model.rotation.z);
       }
       else {
 
@@ -113,7 +119,6 @@ class Model extends React.Component {
   }
 
  connect = () => {
-
 
   navigator.bluetooth.requestDevice({
       // filters: [myFilters]       // you can't use filters and acceptAllDevices together
@@ -182,6 +187,8 @@ handleData = (event) => {
   var zRotation = event.target.value.getFloat32(8,true);
 
   this.setState({ x: xRotation, y: yRotation, z: zRotation});
+
+  //this.loadGltf();
 
   //console.log(this.state.x, this.state.y, this.state.z);
   
@@ -255,7 +262,7 @@ handleData = (event) => {
 
   }
 
-  loadGltf = (props) => {
+  loadGltf = (props, position) => {
       const gltfLoader = new GLTFLoader() // Removed THREE
 
       const dracoLoader = new DRACOLoader();
@@ -272,6 +279,7 @@ handleData = (event) => {
           gltfLoader.load(
                 silhouette,
              function(gltf) {
+                model = gltf.scene;
                scene.add(gltf.scene);
              },
              function(xhr) {
@@ -293,6 +301,7 @@ handleData = (event) => {
           gltfLoader.load(
               pelvicHalf,      //"/Pelvic-half.glb",
              function(gltf) {
+                model = gltf.scene;
                scene.add(gltf.scene);
              },
              function(xhr) {
@@ -307,6 +316,7 @@ handleData = (event) => {
            this.setState({ selectedPelvic: true })
 
       }
+
   }
 
   resizeCanvasToDisplaySize = () => {
@@ -332,6 +342,8 @@ handleData = (event) => {
     this.frameId = window.requestAnimationFrame(this.animate);
   };
   renderScene = () => {
+
+    
     if (this.renderer) this.renderer.render(scene, this.camera);
   };
 
