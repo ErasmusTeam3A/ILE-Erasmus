@@ -54,7 +54,6 @@ class Model extends React.Component {
   componentDidMount() {
       // GETS EXECUTED ONCE! If u click on button it will NOT re-render componentDidMount
       this.showGLTF();
-      this.connectController();
   }
 
       componentDidUpdate(prevProps, prevState) {
@@ -80,9 +79,13 @@ class Model extends React.Component {
             })
       } else if(prevState.connectedController !== this.state.connectedController) {
           this.connectController();
-          this.connect();
+      } else if(prevState.x !== this.state.x && prevState.y !== this.state.y && prevState.z !== this.state.z) {
+        //console.log("ya");
+        //console.log(this.state.x, this.state.y, this.state.z)
+
+        console.log("test");
+
       }
-      
       else {
 
           // Default camera position
@@ -180,7 +183,7 @@ handleData = (event) => {
 
   this.setState({ x: xRotation, y: yRotation, z: zRotation});
 
-  console.log(this.state.x, this.state.y, this.state.z);
+  //console.log(this.state.x, this.state.y, this.state.z);
   
 }
 
@@ -344,6 +347,7 @@ handleData = (event) => {
   };
 
   render() {
+    //console.log(this.state.x)
     return (
       <div
         className="modelContainer"
