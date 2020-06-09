@@ -1,5 +1,7 @@
 import React from 'react';
 import Model from '../components/organisms/Model';
+import ControllerTest from '../components/organisms/ControllerTest';
+
 import Back from '../components/atoms/Back';
 import Button from '../components/atoms/Button';
 import Collapsible from 'react-collapsible';
@@ -18,6 +20,7 @@ class Interactive extends React.Component {
             filterNames: ["skin", "bones"],
             selectedFilter: 0,
             isHidden: true,
+            connected: false
             show: false,
             data: data1,
             currentData: 0
@@ -61,6 +64,14 @@ class Interactive extends React.Component {
     zoomInCompartmentUterus = () => {
         this.toggleHidden("y");
         this.setState({ zoomInCompartmentUterus:  !this.state.zoomInCompartmentUterus });
+    }
+
+    connectController = () => {
+        this.setState({ connected: true });
+    }
+
+    disconnectController = () => {
+        this.setState({  connected: false });
     }
 
     switchFilter = () => {
@@ -107,6 +118,9 @@ class Interactive extends React.Component {
                         <div className="interactive__menu-filter">
                             {/* <Button link="#" className="button button-side-left" text="filter"></Button> */}
                             <button className="button button-side-left" onClick={this.switchFilter}> Change filter </button>
+                            
+                            <button className="button button-side-left" onClick={this.connectController}> Connect </button>
+                            <button className="button button-side-left" onClick={this.disconnectController}> Disconnect </button>
 
                         </div>
                     </div>
@@ -115,13 +129,13 @@ class Interactive extends React.Component {
                             {/* {" "} */}
                         show Modal{" "}
                         </button>
-
                     </div>
                     <Modal onClose={this.showModal} show={this.state.show} content={this.state.data}/>
                     {/* <button className="interactive__filter-button" onClick={this.switchFilter}> Change filter </button> */}
                     {/* <Back /> */}
                     {/* hier moet het model komen in plaats van <Model/>*/}
-                    <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} selectedFilter={this.state.selectedFilter} gltfName={this.state.gltfName} />
+                    <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} selectedFilter={this.state.selectedFilter} gltfName={this.state.gltfName} connected={this.state.connected} />
+                    {/* <ControllerTest connected={this.state.connected} /> */}
                 </div>
             </div>
       )
