@@ -20,7 +20,7 @@ class Interactive extends React.Component {
             filterNames: ["skin", "bones"],
             selectedFilter: 0,
             isHidden: true,
-            connected: false
+            connected: false,
             show: false,
             data: data1,
             currentData: 0
