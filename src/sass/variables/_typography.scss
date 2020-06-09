@@ -1,13 +1,13 @@
 /* ===============================================
    Typography settings
    =============================================== */
-@import url("//fast.fonts.net/cssapi/058464e8-6f64-4880-9e59-42598da486ed.css");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Raleway:wght@400;700&display=swap'");
 
 $typo: (
     // fonts
     'font': (
-        'text': 'Univers W01, Arial, sans-serif',
-        'head': 'Futura W01, Helvetica, sans-serif',
+        'text': 'Open Sans, sans-serif',
+        'head': 'Raleway, sans-serif',
     ),
     'selection': (
         'background': #b4d5fe,
@@ -15,6 +15,7 @@ $typo: (
     ),
     // line height
     'line-height': (
+        'h1-head':1,
         'text': 1.8,
         'head': 1.1,
     ),
@@ -36,9 +37,9 @@ $typo: (
         'md': 10px,
     ),
     'small': (
-        'xs': 13px,
-        'sm': 13px,
-        'md': 13px,
+        'xs': 14px,
+        'sm': 14px,
+        'md': 14px,
     ),
     'title': (
         'xs': 32px,
@@ -49,20 +50,21 @@ $typo: (
         'xs': 32px,
         'sm': 40px,
         'md': 56px,
+        'lg': 120px,
     ),
     'h2': (
         'xs': 24px,
         'sm': 24px,
-        'md': 36px,
+        'md': 34px,
     ),
     'h3': (
         'xs': 21px,
-        'sm': 21px,
-        'md': 24px,
+        'sm': 24px,
+        'md': 27px,
     ),
     'h4': (
         'xs': 16px,
-        'sm': 16px,
+        'sm': 20px,
         'md': 21px,
     ),
     'h5': (

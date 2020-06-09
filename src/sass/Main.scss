@@ -27,6 +27,23 @@ map-get-deep($typo, 'base', 'md')
     './mixins/distance';
 
 // Base styles
+@import
+      './base/base.scss',
+      './base/custom-bootstrap.scss',
+      './base/start.scss',
+      './base/interactive.scss',
+      './base/recent.scss',
+      './base/select.scss',
+      './base/dicom.scss';
 
 // Components
-@import './components/test.scss';
+@import './components/Model.scss',
+ './components/test.scss',
+ './components/Modal.scss',
+ './components/test.scss',
+        './components/button.scss',
+        './components/back.scss',
+        './components/Collapsible.scss',
+        './components/card.scss',
+        './components/dicom-card.scss';
+        

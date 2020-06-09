@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index.js'],
   module: {
     rules: [
       {
@@ -8,8 +8,12 @@ module.exports = {
         use: ['babel-loader']
       },
       {
-          test:/\.s[ac]ss$/i,
-          use:['style-loader','css-loader', 'sass-loader']
+        test: /\.s[ac]ss$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader'
       }
     ]
   },
@@ -23,6 +27,7 @@ module.exports = {
   },
   devServer: {
     open: true,
+    historyApiFallback: true,
     contentBase: './dist'
-  }
+  },
 };
