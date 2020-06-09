@@ -17,7 +17,9 @@ class Model extends React.Component {
     this.state = {
         zoomInPelvicFloor: false,
         zoomInCompartmentUterus: false,
-        selectedFilter: 0
+        selectedFilter: 0,
+        selectedSkin: false,
+        selectedPelvic: false
     }
   }
 
@@ -53,9 +55,6 @@ class Model extends React.Component {
       this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
       const controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-      console.log(this.state.zoomInCompartmentUterus);
-      console.log(this.state.zoomInPelvicFloor + "pelvic");
-
       if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
             console.log("Update pelvic floor success");
             this.camera.position.set(0,-2,5);
@@ -65,11 +64,25 @@ class Model extends React.Component {
       } else if(prevState.selectedFilter !== this.state.selectedFilter) {
             this.loadGltf();
             this.camera.position.set(0,-2,6);
+
+            // Reset scene, but skip first three elements in scene.children array because those elements are lightning, shadow.
+            scene.children.slice(3).map((newchildren) => {
+            scene.remove(newchildren);
+
+            })
+      } else {
+
+          // Default camera position
+          if(this.state.selectedFilter == 0) {
+              this.camera.position.set(0,-2,10);
+          } else {
+              this.camera.position.set(0,-2,7);
+          }
+
       }
 
       // x = left, right y = back, front z = zoom in or out
-      // if(prevState.zoomInUterus !== this.state.zoomInUterus) etc.
-      // uterus:   this.camera.position.set(0,2.5,2.5);
+
   }
 
 
@@ -91,7 +104,7 @@ class Model extends React.Component {
       this.camera.position.set(0,-2,8);
 
       this.renderer = new THREE.WebGLRenderer({ antialias: true });
-      this.renderer.setClearColor("#263238");
+      this.renderer.setClearColor("#ffffff");
       this.renderer.setSize(width, height);
       this.mount.appendChild(this.renderer.domElement);
 
@@ -128,42 +141,52 @@ class Model extends React.Component {
 
       const dracoLoader = new DRACOLoader();
 
-      if(this.props.gltfName) {
-          dracoLoader.setDecoderPath( this.props.gltfName);
-      } else {
-          dracoLoader.setDecoderPath("/Pelvic-half.glb");
-      }
+      const pelvicHalf = "/Pelvic-half.glb";
+      const silhouette = "/Silhouette.glb";
 
       gltfLoader.setDRACOLoader( dracoLoader );
 
-      if(this.props.gltfName) {
+      if(this.props.selectedFilter == 0) {
+
+          dracoLoader.setDecoderPath(silhouette);
+
           gltfLoader.load(
-            this.props.gltfName,      //"/Pelvic-half.glb",
-           function(gltf) {
-             scene.add(gltf.scene);
-           },
-           function(xhr) {
-             console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-           },
-           // called when loading has errors
-           function(error) {
-             console.log("An error happened" + error);
-           }
-         );
-      } else {
-        gltfLoader.load(
-          "/Pelvic-half.glb",      //"/Pelvic-half.glb",
-         function(gltf) {
-           scene.add(gltf.scene);
-         },
-         function(xhr) {
-           console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-         },
-         // called when loading has errors
-         function(error) {
-           console.log("An error happened" + error);
-         }
-       );
+                silhouette,
+             function(gltf) {
+               scene.add(gltf.scene);
+             },
+             function(xhr) {
+               console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+             },
+             // called when loading has errors
+             function(error) {
+               console.log("An error happened" + error);
+             }
+          );
+
+          this.setState({ selectedSkin: true })
+      }
+
+      if(this.props.selectedFilter == 1) {
+
+      dracoLoader.setDecoderPath(pelvicHalf);
+
+          gltfLoader.load(
+              pelvicHalf,      //"/Pelvic-half.glb",
+             function(gltf) {
+               scene.add(gltf.scene);
+             },
+             function(xhr) {
+               console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+             },
+             // called when loading has errors
+             function(error) {
+               console.log("An error happened" + error);
+             }
+          );
+
+           this.setState({ selectedPelvic: true })
+
       }
   }
 
@@ -205,8 +228,6 @@ class Model extends React.Component {
   };
 
   render() {
-
-    console.log(this.state)
     return (
       <div
         className="modelContainer"
