@@ -1,27 +1,31 @@
 import React from 'react';
 import Model from '../components/organisms/Model';
+import ControllerTest from '../components/organisms/ControllerTest';
+
 import Back from '../components/atoms/Back';
 import Button from '../components/atoms/Button';
 import Collapsible from 'react-collapsible';
 import { Link } from 'react-router-dom';
 // import Modal from 'react-bootstrap/Modal'
 import Modal from '../components/organisms/Modal'
-import data from '../../dist/data/data.json'
+import data1 from '../../dist/data/data.json'
+import data2 from '../../dist/data/data2.json'
 
 class Interactive extends React.Component {
     constructor() {
-      super();
-      this.state = {
-          zoomInPelvicFloor: false,
-          zoomInCompartmentUterus: false,
-          filterNames: ["skin", "bones"],
-          selectedFilter: 0,
+        super();
+        this.state = {
+            zoomInPelvicFloor: false,
+            zoomInCompartmentUterus: false,
+            filterNames: ["skin", "bones"],
+            selectedFilter: 0,
             isHidden: true,
-            show: false
+            connected: false,
+            show: false,
+            data: data1,
+            currentData: 0
         }
-        this.ToggleHidden = this.toggleHidden.bind(this)
-
-
+        this.toggleHidden = this.toggleHidden.bind(this)
     }
 
     showModal = e => {
@@ -30,19 +34,44 @@ class Interactive extends React.Component {
         });
     };
 
-    toggleHidden() {
-
-        this.setState({
-            isHidden: !this.state.isHidden
-        })
-    }
+    toggleHidden(param) {
+        switch(param) {
+            case "x":
+                if(this.state.currentData == 1){
+                    this.setState(prevState => ({ isHidden: !prevState.isHidden }));
+                }
+                else{
+                    this.setState({isHidden: false, data: data2, currentData: 1});
+                }
+                // code block
+                break;
+            case "y":
+                if(this.state.currentData == 2){
+                    this.setState(prevState => ({ isHidden: !prevState.isHidden }));
+                }
+                else{
+                    this.setState({isHidden: false, data: data1, currentData: 2});
+                }
+                break;
+        }
+    };
 
     zoomInPelvicFloor = () => {
-      this.setState({ zoomInPelvicFloor: !this.state.zoomInPelvicFloor });
+        this.toggleHidden("x");
+        this.setState({ zoomInPelvicFloor: !this.state.zoomInPelvicFloor });
     }
 
     zoomInCompartmentUterus = () => {
-      this.setState({ zoomInCompartmentUterus:  !this.state.zoomInCompartmentUterus });
+        this.toggleHidden("y");
+        this.setState({ zoomInCompartmentUterus:  !this.state.zoomInCompartmentUterus });
+    }
+
+    connectController = () => {
+        this.setState({ connected: true });
+    }
+
+    disconnectController = () => {
+        this.setState({  connected: false });
     }
 
     switchFilter = () => {
@@ -54,6 +83,7 @@ class Interactive extends React.Component {
     }
 
     render() {
+        const { isHidden } = this.state;
       return (
           <div className="container" >
                 <div className="interactive">
@@ -88,21 +118,24 @@ class Interactive extends React.Component {
                         <div className="interactive__menu-filter">
                             {/* <Button link="#" className="button button-side-left" text="filter"></Button> */}
                             <button className="button button-side-left" onClick={this.switchFilter}> Change filter </button>
+                            
+                            <button className="button button-side-left" onClick={this.connectController}> Connect </button>
+                            <button className="button button-side-left" onClick={this.disconnectController}> Disconnect </button>
 
                         </div>
                     </div>
                     <div className="interactive__side-menu">
-                        <button className="button button-side-right" id="centered-toggle-button" onClick={e => {this.showModal(e);}}>
+                        <button className={`button button-side-right ${isHidden ? " hidden" : ""}`} id="centered-toggle-button" onClick={e => {this.showModal(e);}}>
                             {/* {" "} */}
                         show Modal{" "}
                         </button>
-
                     </div>
-                    <Modal onClose={this.showModal} show={this.state.show} content={data}></Modal>
+                    <Modal onClose={this.showModal} show={this.state.show} content={this.state.data}/>
                     {/* <button className="interactive__filter-button" onClick={this.switchFilter}> Change filter </button> */}
                     {/* <Back /> */}
                     {/* hier moet het model komen in plaats van <Model/>*/}
-                    <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} selectedFilter={this.state.selectedFilter} gltfName={this.state.gltfName} />
+                    <Model zoomInPelvicFloor={this.state.zoomInPelvicFloor} zoomInCompartmentUterus={this.state.zoomInCompartmentUterus} selectedFilter={this.state.selectedFilter} gltfName={this.state.gltfName} connected={this.state.connected} />
+                    {/* <ControllerTest connected={this.state.connected} /> */}
                 </div>
             </div>
       )

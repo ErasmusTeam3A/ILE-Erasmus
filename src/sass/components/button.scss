@@ -21,4 +21,8 @@
         border-radius: 23px 0 0 23px;
         // transform: translate(-20px, 0);
     }
+    &.hidden{
+        visibility: hidden;
+        display: none;
+    }
 }
