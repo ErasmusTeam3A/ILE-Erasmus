@@ -33,7 +33,8 @@ map-get-deep($typo, 'base', 'md')
       './base/start.scss',
       './base/interactive.scss',
       './base/recent.scss',
-      './base/select.scss';
+      './base/select.scss',
+      './base/dicom.scss';
 
 // Components
 @import './components/Model.scss',
@@ -43,5 +44,6 @@ map-get-deep($typo, 'base', 'md')
         './components/button.scss',
         './components/back.scss',
         './components/Collapsible.scss',
-        './components/card.scss';
+        './components/card.scss',
+        './components/dicom-card.scss';
         

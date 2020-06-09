@@ -19,13 +19,13 @@ const Start = () => {
                     </div>
                     <div className="start__button-container">
                         <div className="start__button-wrapper">
-                            <Button disabled={false} link="/interactive" text="Import dicom" />
+                            <Button disabled={false} link="/dicom" text="Import dicom" />
                         </div>
                         <div className="start__button-wrapper">
-                            <Button disabled={false} link="/model" text="Selecteer lichaams onderdeel" />
+                            <Button disabled={false} link="/select" text="Selecteer lichaams onderdeel" />
                         </div>
                         <div className="start__button-wrapper">
-                            <Button disabled={false} link="/model" text="Recent geopend" />
+                            <Button disabled={false} link="/recent" text="Recent geopend" />
                         </div>
                         <div className="start__button-wrapper">
                             <Button disabled={false} link="/model" text="Afsluiten" />
