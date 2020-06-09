@@ -11,3 +11,7 @@ dist/Pelvic-half.glb
 dist/Silhouette.glb
 
 src/objects/pelvic.stl
+
+dist/.DS_Store
+
+.DS_Store

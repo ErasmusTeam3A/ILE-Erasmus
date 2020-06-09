@@ -1,8 +1,8 @@
 import React from 'react';
-import undo from '../../dist/icons/undo.png'
 import human from '../../dist/icons/human.png'
 import hips from '../../dist/icons/human-hips.png'
 import Button from '../components/atoms/Button';
+import BackButton from '../components/atoms/Back'
 
 
 class Select extends React.Component{
@@ -32,9 +32,7 @@ toggleBox = () => {
                             <h1>Selecteer lichaamsdeel</h1>
                         </div>
 
-                        <div className="back">
-                            <img src={undo} alt='undo'></img>
-                        </div>
+                        <BackButton />
 
                         <div className="text">
                             <p>Klik op het lichaam om <br /> een interactieve weergave te openen van dit onderdeel</p>

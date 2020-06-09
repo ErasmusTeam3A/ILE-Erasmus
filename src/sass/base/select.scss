@@ -2,6 +2,7 @@
     display: inline-block;
     position: relative;
     width: 100%;
+    height: 100vh;
     padding: 50px 25px 30px ;
     box-sizing: border-box;
     background: rgb(204,212,227);
@@ -68,7 +69,7 @@
             h1{
                 font-size: unquote(map-get-deep($typo, 'h2', 'sm'));
                 color: map-get-deep($swatches, 'black');
-                font-family: 'Raleway, sans-serif';
+                font-family: unquote(map-get-deep($typo, 'font', 'head'));
                 position: relative;
                 display:inline-block;
                 padding-bottom: 15px;
@@ -92,18 +93,7 @@
             margin-top:15px;
 
             p{
-            font-family: 'Open Sans, sans-serif' ; 
-            }
-        }
-
-        .back{
-            float: left;
-            height: 50px;
-            width: auto;
-            img{
-                height: 50px;
-                object-fit: contain;
-                width: auto;
+            font-family: unquote(map-get-deep($typo, 'font', 'text'));
             }
         }
     }

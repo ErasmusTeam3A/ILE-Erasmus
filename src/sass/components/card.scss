@@ -1,3 +1,5 @@
+a{
+    text-decoration: none;
 .card{
     width: 100%;
     height: 175px;
@@ -27,11 +29,17 @@
             font-size: map-get-deep($typo, 'h3', 'md');
             margin-bottom: 20px;
             text-transform: uppercase;
+            color: map-get-deep($swatches, 'black');
+        }
+
+        .specials{
+            color: map-get-deep($swatches, 'black');
         }
 
         span{
             width: 100%;
             display: inline-block;
+            color: map-get-deep($swatches, 'gray');
         }
         strong{
             display: inline-block;
@@ -54,12 +62,17 @@
             font-weight: 700;
         }
 
+        p{
+            color: map-get-deep($swatches, 'gray');
+        }
+
         .type{
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             width: 100%;
             font-family: unquote(map-get-deep($typo, 'font', 'head'));
+            
 
             .left{
                 width: calc(100% - 50px);
@@ -70,6 +83,7 @@
                     display: inline-block;
                     width: auto;
                     margin-left: 5px;
+                    color: map-get-deep($swatches, 'gray');
                 } 
                 span{
                     color: map-get-deep($swatches, 'blue');
@@ -98,4 +112,4 @@
 
 
 }
-
+}

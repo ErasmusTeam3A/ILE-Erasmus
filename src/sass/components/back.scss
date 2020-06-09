@@ -1,12 +1,16 @@
-.back_button{
-    width: 100px;
-    height: 75px;
-    background-image: url('/icons/icons.png');
-    background-position: 0px 0px;
-    background-color: transparentize($color: #000000, $amount: 1);
-    border: 0px;
-
-    &:hover{
-        background-color: grayscale($color: #e7e7e7);
+.back{
+    position: absolute;
+    right: 35px;
+    top: 35px;
+    height: 50px;
+    width: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+    img{
+        height: 50px;
+        object-fit: contain;
+        width: auto;
     }
 }

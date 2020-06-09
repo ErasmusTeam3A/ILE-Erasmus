@@ -1,6 +1,7 @@
 import React from 'react';
-import undo from '../../dist/icons/undo.png'
+import BackButton from '../components/atoms/Back'
 import File from "../components/organisms/Card-resent.jsx";
+
 
 const Start = () => {
     return (
@@ -12,16 +13,14 @@ const Start = () => {
                         <div className="title">
                             <h1>Recent geopende weergave</h1>
                         </div>
-
-                        <div className="back">
-                            <img src={undo} alt='undo'></img>
-                        </div>
                     </div>
+
+                    <BackButton />
 
                     <div className="files">
 
                         <input type='search' placeholder="zoeken"></input>
-
+                        
                         <File />
 
                     </div>

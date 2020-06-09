@@ -17,6 +17,10 @@
        padding-left: 30px;
        box-sizing: border-box;
 
+       h2{
+        color: map-get-deep($swatches, 'black');
+       }
+
        strong{
            color: map-get-deep($swatches, 'gray');
        }
