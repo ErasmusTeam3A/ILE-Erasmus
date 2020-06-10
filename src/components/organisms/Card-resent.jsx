@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FileIcon from '../../../dist/icons/file.png'
+import FileIcon from '../../images/file.png'
 import { Link } from 'react-router-dom';
 
 const Card = () => {

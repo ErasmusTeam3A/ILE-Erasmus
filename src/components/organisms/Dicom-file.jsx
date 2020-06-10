@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DicomHip from '../../../dist/icons/dicom-pelvic.jpg'
+import DicomHip from '../../images/dicom-pelvic.jpg'
 
 import { Link } from 'react-router-dom';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import undo from '../../../dist/icons/undo.png'
+import undo from '../../images/undo.png'
 
 import { useHistory } from "react-router-dom";
 

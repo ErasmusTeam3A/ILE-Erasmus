@@ -1,6 +1,4 @@
 import React from 'react';
-import human from '../../dist/icons/human.png'
-import hips from '../../dist/icons/human-hips.png'
 import Button from '../components/atoms/Button';
 import BackButton from '../components/atoms/Back'
 
@@ -20,7 +18,6 @@ toggleBox = () => {
 };
 
     render() {
-        let image = this.state.active ? {human} : {hips}
         const { toggleImage } = this.state;
     return (
         <div className="container">
@@ -40,12 +37,9 @@ toggleBox = () => {
                     </div>
 
                     <div className="silhouette">
-                    <div onClick={this.toggleBox} className={`silhouette-image ${toggleImage ? " hip" : " body"}`}>
-                        
+                        <div onClick={this.toggleBox} className={`silhouette-image ${toggleImage ? " hip" : " body"}`}>
                     </div>
 
-                        
-                        {/* <img src={this.state.image} onClick={() => this.setState({active: !this.state.active})}></img> */}
                     </div>
                     <div className="start__button-container">
                         <div className="start__button-wrapper">
