@@ -9,11 +9,14 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 let freedomMesh;
 let scene;
 let model;
+let valueX;
+let valueY;
+let valueZ;
 
-// Controller variables 
+// Controller variables
 let myDevice;
 const myService = 0xffb0;        // fill in a service you're looking for here
-const myCharacteristic = 0x2AB3; 
+const myCharacteristic = 0x2AB3;
 
 class Model extends React.Component {
     constructor(props) {
@@ -27,7 +30,10 @@ class Model extends React.Component {
             connectedController: false,
             x: 0,
             y: 0,
-            z: 0
+            z: 0,
+            cameraX: 0,
+            cameraY: 0,
+            cameraZ: 0
         }
     }
 
@@ -62,12 +68,24 @@ class Model extends React.Component {
         this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
         const controls = new OrbitControls(this.camera, this.renderer.domElement);
 
+        let cameraX;
+        let cameraY;
+        let cameraZ;
+
         if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
             console.log("Update pelvic floor success");
+
             this.camera.position.set(0,-2,5);
+            this.cameraUpdate(0, -2, 5);
+
+            //this.setState({ cameraX: cameraX, cameraY: cameraY, cameraZ: cameraZ})
+
         } else if(prevState.zoomInCompartmentUterus !== this.state.zoomInCompartmentUterus) {
             console.log("Update compartment success");
             this.camera.position.set(0, 0, 4);
+            this.cameraUpdate(0, 0, 4);
+
+          //  this.cameraUpdate(0, 0, 4)
         } else if(prevState.selectedFilter !== this.state.selectedFilter) {
             this.loadGltf();
             this.camera.position.set(0,-2,6);
@@ -77,16 +95,27 @@ class Model extends React.Component {
             scene.remove(newchildren);
 
             })
+
+            console.log("yaaa")
+
+
         } else if(prevState.connectedController !== this.state.connectedController) {
             this.connectController();
-            this.camera.position.set(0,-2,10);
+
+            if(!valueX && !valueY && !valueZ) {
+                this.camera.position.set(0,-2, 10);
+            } else {
+                this.camera.position.set(valueX, valueY, valueZ);
+            }
+
+
         } else if(prevState.x !== this.state.x && prevState.y !== this.state.y && prevState.z !== this.state.z) {
             this.camera.position.set(0,0,10);
-            
+
             model.rotation.x = this.state.x;
             model.rotation.y = this.state.y;
             model.rotation.z = this.state.z;
-            
+
         }
         else {
             // Default camera position
@@ -124,11 +153,11 @@ class Model extends React.Component {
           myDevice = device;
 
           // connect to the device once you find it:
-          
+
           if(!device.gatt.connect()) {
             console.log('no connection')
           } else {
-            return device.gatt.connect(); 
+            return device.gatt.connect();
           }
       })
       .then((server) => {
@@ -146,7 +175,7 @@ class Model extends React.Component {
           for (let c in characteristics) {
               characteristics[c].startNotifications()
               .then(this.subscribeToChanges)
-          } 
+          }
 
       })
       .catch((error) => {
@@ -162,7 +191,7 @@ class Model extends React.Component {
 
   handleData = (event) => {
 
-    var zRotation = event.target.value.getFloat32(0,true)/-57.295779; 
+    var zRotation = event.target.value.getFloat32(0,true)/-57.295779;
     var xRotation = event.target.value.getFloat32(4,true)/-57.295779;
     var yRotation = event.target.value.getFloat32(8,true)/57.295779;
 
@@ -172,7 +201,7 @@ class Model extends React.Component {
     console.log(`x = ${this.state.x} y = ${this.state.y} z = ${this.state.z}`);
 
     //console.log(this.state.x, this.state.y, this.state.z);
-    
+
   }
 
     disconnect = () => {
@@ -189,7 +218,7 @@ class Model extends React.Component {
 
 
       console.log("disconnected");
-    
+
     }
 
 
@@ -216,6 +245,18 @@ class Model extends React.Component {
         this.mount.appendChild(this.renderer.domElement);
 
         const controls = new OrbitControls(this.camera, this.renderer.domElement);
+    }
+
+    cameraUpdate = (x, y, z) => {
+
+
+
+          valueX = x;
+          valueY = y;
+          valueZ = z;
+
+
+
     }
 
     loadTexture = () => {
@@ -324,7 +365,7 @@ class Model extends React.Component {
     };
     renderScene = () => {
 
-      
+
       if (this.renderer) this.renderer.render(scene, this.camera);
     };
 
@@ -340,7 +381,9 @@ class Model extends React.Component {
     };
 
     render() {
-      //console.log(this.state.x)
+
+      console.log(valueX, valueY, valueZ)
+
       return (
         <div
           className="modelContainer"
