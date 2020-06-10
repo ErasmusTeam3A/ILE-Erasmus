@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom';
 import Modal from '../components/organisms/Modal'
 import data1 from '../../dist/data/data.json'
 import data2 from '../../dist/data/data2.json'
+import data from '../../dist/data/data.json'
+import BackButton from '../components/atoms/Back'
 
 class Interactive extends React.Component {
     constructor() {
@@ -92,6 +94,7 @@ class Interactive extends React.Component {
                             Compartimenten Baarmoeder
                         </h2>
                     </div>
+                    <BackButton />
                     <div className="interactive__menu">
                         <div className="interactive__menu-heading">
                             <h3>Menu</h3>
@@ -127,7 +130,7 @@ class Interactive extends React.Component {
                     <div className="interactive__side-menu">
                         <button className={`button button-side-right ${isHidden ? " hidden" : ""}`} id="centered-toggle-button" onClick={e => {this.showModal(e);}}>
                             {/* {" "} */}
-                        show Modal{" "}
+                        Toon theorie{" "}
                         </button>
                     </div>
                     <Modal onClose={this.showModal} show={this.state.show} content={this.state.data}/>
