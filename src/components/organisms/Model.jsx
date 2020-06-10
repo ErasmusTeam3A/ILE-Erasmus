@@ -72,8 +72,8 @@ class Model extends React.Component {
         if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
             console.log("Update pelvic floor success");
 
-            this.camera.position.set(0,-2,5);
-            this.cameraUpdate(0, -2, 5);
+            this.camera.position.set(0,-3,5);
+            this.cameraUpdate(0, -3, 5);
 
             //this.setState({ cameraX: cameraX, cameraY: cameraY, cameraZ: cameraZ})
 
