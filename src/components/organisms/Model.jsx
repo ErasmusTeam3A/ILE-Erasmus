@@ -9,9 +9,9 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 let freedomMesh;
 let scene;
 let model;
-let valueX;
-let valueY;
-let valueZ;
+let cameraPositionX;
+let cameraPositionY;
+let cameraPositionZ;
 
 // Controller variables
 let myDevice;
@@ -68,9 +68,6 @@ class Model extends React.Component {
         this.camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
         const controls = new OrbitControls(this.camera, this.renderer.domElement);
 
-        let cameraX;
-        let cameraY;
-        let cameraZ;
 
         if (prevState.zoomInPelvicFloor !== this.state.zoomInPelvicFloor) {
             console.log("Update pelvic floor success");
@@ -88,24 +85,27 @@ class Model extends React.Component {
           //  this.cameraUpdate(0, 0, 4)
         } else if(prevState.selectedFilter !== this.state.selectedFilter) {
             this.loadGltf();
-            this.camera.position.set(0,-2,6);
+
+            //this.camera.position.set(0,-2, 6);
 
             // Reset scene, but skip first three elements in scene.children array because those elements are lightning, shadow.
             scene.children.slice(3).map((newchildren) => {
             scene.remove(newchildren);
 
+            console.log(this.state.selectedFilter)
+
             })
 
-            console.log("yaaa")
-
+            console.log("Selectedfilter is not the same as previous state")
 
         } else if(prevState.connectedController !== this.state.connectedController) {
             this.connectController();
 
-            if(!valueX && !valueY && !valueZ) {
+            // Check if values exists or not
+            if(!cameraPositionX && !cameraPositionY && !cameraPositionZ) {
                 this.camera.position.set(0,-2, 10);
             } else {
-                this.camera.position.set(valueX, valueY, valueZ);
+                this.camera.position.set(cameraPositionX, cameraPositionY, cameraPositionZ);
             }
 
 
@@ -116,15 +116,23 @@ class Model extends React.Component {
             model.rotation.y = this.state.y;
             model.rotation.z = this.state.z;
 
-        }
-        else {
-            // Default camera position
+        } else {
             if(this.state.selectedFilter == 0) {
-                this.camera.position.set(0,-2,10);
-            } else {
-                this.camera.position.set(0,-2,7);
+                if(!cameraPositionX && !cameraPositionY && !cameraPositionZ) {
+                    this.camera.position.set(0,-2, 10);
+                } else {
+                    this.camera.position.set(cameraPositionX, cameraPositionY, cameraPositionZ);
+                }
+
+            } else if(this.state.selectedFilter == 1) {
+                if(!cameraPositionX && !cameraPositionY && !cameraPositionZ) {
+                    this.camera.position.set(0,-2, 6);
+                } else {
+                    this.camera.position.set(cameraPositionX, cameraPositionY, cameraPositionZ);
+                }
             }
         }
+
 
     // x = left, right y = back, front z = zoom in or out
 
@@ -237,8 +245,6 @@ class Model extends React.Component {
         this.camera.position.z = 8;
         this.camera.position.y = 5;
 
-        this.camera.position.set(0,-2,8);
-
         this.renderer = new THREE.WebGLRenderer({ antialias: true });
         this.renderer.setClearColor("#ffffff");
         this.renderer.setSize(width, height);
@@ -248,15 +254,9 @@ class Model extends React.Component {
     }
 
     cameraUpdate = (x, y, z) => {
-
-
-
-          valueX = x;
-          valueY = y;
-          valueZ = z;
-
-
-
+        cameraPositionX = x;
+        cameraPositionY = y;
+        cameraPositionZ = z;
     }
 
     loadTexture = () => {
@@ -381,9 +381,6 @@ class Model extends React.Component {
     };
 
     render() {
-
-      console.log(valueX, valueY, valueZ)
-
       return (
         <div
           className="modelContainer"
