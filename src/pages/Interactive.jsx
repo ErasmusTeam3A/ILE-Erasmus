@@ -69,11 +69,9 @@ class Interactive extends React.Component {
     }
 
     connectController = () => {
-        this.setState({ connected: true });
-    }
-
-    disconnectController = () => {
-        this.setState({  connected: false });
+      this.setState({
+         connected: !this.state.connected
+       });
     }
 
     switchFilter = () => {
@@ -121,9 +119,8 @@ class Interactive extends React.Component {
                         <div className="interactive__menu-filter">
                             {/* <Button link="#" className="button button-side-left" text="filter"></Button> */}
                             <button className="button button-side-left" onClick={this.switchFilter}> Change filter </button>
-                            
+
                             <button className="button button-side-left" onClick={this.connectController}> Connect </button>
-                            <button className="button button-side-left" onClick={this.disconnectController}> Disconnect </button>
 
                         </div>
                     </div>
