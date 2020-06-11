@@ -1,6 +1,6 @@
 import React from 'react';
-import undo from '../../dist/icons/undo.png'
 import File from "../components/organisms/Dicom-file.jsx";
+import BackButton from '../components/atoms/Back'
 
 const Dicom = () => {
     return (
@@ -13,9 +13,8 @@ const Dicom = () => {
                             <h1>Selecteer DICOM</h1>
                         </div>
 
-                        <div className="back">
-                            <img src={undo} alt='undo'></img>
-                        </div>
+                        <BackButton />
+                        
                     </div>
 
                     <div className="files">

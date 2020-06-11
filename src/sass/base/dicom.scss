@@ -51,7 +51,7 @@
             h1{
                 font-size: unquote(map-get-deep($typo, 'h2', 'sm'));
                 color: map-get-deep($swatches, 'black');
-                font-family: 'Raleway, sans-serif';
+                font-family: unquote(map-get-deep($typo, 'font', 'head'));
                 position: relative;
                 display:inline-block;
                 padding-bottom: 15px;
