@@ -29,6 +29,27 @@ export default class Modal extends React.Component {
                             <p>{this.props.content[2][2]}</p>
                         </div>
                     </div>
+                    <div className="content-right">
+                        <h4>{this.props.content[2][2]}</h4>
+                        <ul className="content-ul">
+                             {this.props.content[3].map(content => (
+                                <li>
+                                    {content}
+                                </li>
+                            ))}
+                            {/* <li>{this.props.content[3][1]}</li>
+                            <li>{this.props.content[3][2]}</li>
+                            <li>{this.props.content[3][3]}</li>
+                            <li>{this.props.content[3][4]}</li>
+                            <li>{this.props.content[3][5]}</li>
+                            <li>{this.props.content[3][6]}</li>
+                            <li>{this.props.content[3][7]}</li>
+                            <li>{this.props.content[3][8]}</li>
+                            <li>{this.props.content[3][9]}</li>
+                            <li>{this.props.content[3][10]}</li>
+                            <li>{this.props.content[3][11]}</li> */}
+                        </ul>
+                    </div>
                 </div>
             </div>
         );
