@@ -60,6 +60,14 @@
     position: relative;
     width: 100%;
 
+    .content-ul{
+        list-style-type: none;
+    }
+
+    .content-li{
+        list-style-type: none;
+    }
+
     h4{
     color:  map-get-deep($swatches, 'blue');
     }
