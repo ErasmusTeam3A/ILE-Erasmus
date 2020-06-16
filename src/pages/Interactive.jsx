@@ -8,9 +8,9 @@ import Collapsible from 'react-collapsible';
 import { Link } from 'react-router-dom';
 // import Modal from 'react-bootstrap/Modal'
 import Modal from '../components/organisms/Modal'
-import data1 from '../../dist/data/data.json'
-import data2 from '../../dist/data/data2.json'
-import data from '../../dist/data/data.json'
+import data1 from '../data/data.json'
+import data2 from '../data/data2.json'
+import data from '../data/data.json'
 import BackButton from '../components/atoms/Back'
 
 class Interactive extends React.Component {
