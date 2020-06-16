@@ -43,6 +43,9 @@
 &__menu-filter{
     position: absolute;
     bottom: 20%;
+    .button-side-left{
+        margin-bottom: 1rem;
+    }
 }
 
     &__menu-heading{
